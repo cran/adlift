@@ -1,0 +1,47 @@
+\name{transmatdual}
+\alias{transmatdual}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{transmatdual}
+\description{
+Works out the transform matrix for a particular prediction scheme and neighbourhood structure.
+}
+\usage{
+transmatdual(x, f, Pred = AdaptNeigh, neigh = 1, int = TRUE, clo = TRUE,
+ keep = 2)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{x}{A vector of grid values. Can be of any length, not necessarily equally spaced.}
+  \item{f}{A vector of function values corresponding to \env{x}. Must be of the same length as \env{x}.}
+  \item{Pred}{The type of regression to be performed. Possible options are \command{\link{LinearPred}}, \command{\link{QuadPred}}, \command{\link{CubicPred}}, \command{\link{AdaptPred}} and \command{\link{AdaptNeigh}}.}
+  \item{neigh}{The number of neighbours over which the regression is performed at each step. If \env{clo} is false, then this in fact denotes the number of neighbours on each side of the removed point.}
+  \item{int}{Indicates whether or not the regression curve includes an intercept.}
+  \item{clo}{Refers to the configuration of the chosen neighbours. If \env{clo} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
+  \item{keep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two.}
+}
+\details{
+ The function uses \command{Amatdual} to form the refinement matrices \eqn{A_j}, from which the augmented matrices \eqn{T_j} are constructed. This process is iterated, to find the transform matrix (the top level augmented matrix). The rows and columns of this matrix are then reordered to be in the order of \code{out$coeff}, i.e. so that the columns correspond to \eqn{f_1 \dots f_n}.
+}
+\value{
+    \item{out}{the output from the forward transform.}
+  \item{Wnew}{the matrix associated to the wavelet transform.}
+  \item{x}{the original gridpoint vector. }
+}
+
+\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+
+\seealso{\code{\link{Amatdual}}     }
+\examples{
+x1<-runif(10)
+y1<-make.signal2("doppler",x=x1)
+#
+a<-transmatdual(x1,y1,AdaptNeigh,2,TRUE,TRUE,2)
+#
+a$Wnew
+#
+#the transform matrix for this adaptive lifting scheme 
+
+}
+\keyword{array}% at least one, from doc/KEYWORDS
+
+
