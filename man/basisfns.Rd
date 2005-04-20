@@ -31,7 +31,7 @@ basisfns(x, f, pred, neigh, int, clo, keep, plot.f = FALSE, plot.bas = FALSE,
 $\item{pointsin}{the vector of indices of points still to be removed.}
 \item{schhist}{a character string vector of the prediction scheme used for the prediction of each gridpoint (in the order of \env{x}).}
 \item{inthist}{vector of boolean values indicating whether an intercept was used in the prediction steps during the transform (in the order of \env{x}). }
-\item{basmat}{a matrix of wavelet basis function values. The row i represents the function values corresponding to the grid for the basis function associated to the gridpoint \eqn{i}.}
+\item{basmat}{a matrix of wavelet basis function values. The row \env{i} represents the function values corresponding to the grid for the basis function associated to the gridpoint \eqn{i}.}
 %\item{schemehist}{a character string vector of the prediction scheme used for the prediction of each gridpoint (in the order of removal). }
 %\item{interhist}{vector of boolean values indicating whether an intercept was used in the prediction steps during the transform (in the order of removal). }
 }
