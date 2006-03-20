@@ -20,7 +20,7 @@ denoisehetero(x, f, pred, neigh, int, clo, keep, rule = "median")
   \item{rule}{The type of bayesian thresholding used in the procedure. Possible values are \env{"mean"}, \env{"median"} (posterior mean or median thresholding) or "hard or "soft" (hard or soft thresholding). }
 }
 \details{
-The function uses the transform matrix to normalise the detail coefficients produced from the forward transform, so that they can be used in the bayesian thresholding procedure \code{\link{ebayesthresh}}. The coefficients are divided into artificial levels, and the first (largest)level is used to estimate the noise variances of the coefficients, based on the MAD of those coefficients falling in a sliding window around each gridpoint.  Ebayesthresh is then used to threshold the coefficients. The resulting new coefficients are then unnormalised and the transform inverted to obtain an estimate of the true (unnoisy) signal.    
+The function uses the transform matrix to normalise the detail coefficients produced from the forward transform, so that they can be used in the bayesian thresholding procedure EbayesThresh. The coefficients are divided into artificial levels, and the first (largest)level is used to estimate the noise variances of the coefficients, based on the MAD of those coefficients falling in a sliding window around each gridpoint.  EbayesThresh is then used to threshold the coefficients. The resulting new coefficients are then unnormalised and the transform inverted to obtain an estimate of the true (unnoisy) signal.    
 }
 \value{
   \item{out}{the output from the forward transform.}
@@ -35,7 +35,7 @@ The function uses the transform matrix to normalise the detail coefficients prod
 
 \author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
 
-\seealso{\code{\link{denoise}}, \code{\link{ebayesthresh}}, \code{\link{heterovar}}     }
+\seealso{\code{\link{denoise}},  \code{\link{heterovar}}     }
 \examples{
 x1<-runif(256)
 y1<-make.signal2("doppler",x=x1)

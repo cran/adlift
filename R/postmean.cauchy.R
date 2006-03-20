@@ -1,4 +1,4 @@
-"postmean.cauchy2" <-
+"postmean.cauchy" <-
 function(x, w){
 #
 #  Find the posterior mean for the quasi-Cauchy prior with mixing weight w

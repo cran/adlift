@@ -22,7 +22,7 @@ denoiseheteroprop(x, f, pred, neigh, int, clo, keep, rule = "median",gamvec)
 
 }
 \details{
-The function uses the transform matrix to normalise the detail coefficients produced from the forward transform, so that they can be used in the bayesian thresholding procedure \code{\link{ebayesthresh}}.  The normalising factors are calculated assuming that the noise associated to the ith gridpoint is \eqn{\gamma_{i}\sigma}. The coefficients are divided into artificial levels, and the first (largest)level is used to estimate the noise variance of the coefficients.  Ebayesthresh is then used to threshold the coefficients. The resulting new coefficients are then unnormalised and the transform inverted to obtain an estimate of the true (unnoisy) signal.    
+The function uses the transform matrix to normalise the detail coefficients produced from the forward transform, so that they can be used in the bayesian thresholding procedure EbayesThresh.  The normalising factors are calculated assuming that the noise associated to the ith gridpoint is \eqn{\gamma_{i}\sigma}. The coefficients are divided into artificial levels, and the first (largest)level is used to estimate the noise variance of the coefficients.  EbayesThresh is then used to threshold the coefficients. The resulting new coefficients are then unnormalised and the transform inverted to obtain an estimate of the true (unnoisy) signal.    
 }
 \value{
   \item{out}{the output from the forward transform.}
@@ -35,7 +35,7 @@ The function uses the transform matrix to normalise the detail coefficients prod
 
 \author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
 
-\seealso{\code{\link{denoise}}, \code{\link{ebayesthresh}},      }
+\seealso{\code{\link{denoise}}   }
 \examples{
 x1<-runif(256)
 y1<-make.signal2("doppler",x=x1)
