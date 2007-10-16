@@ -42,7 +42,9 @@ The procedure performs a minimum norm update lifting step. Firstly the interval 
 \examples{
 #read in data with multiple values...
 
-mcdata()
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 
 short<-adjustx(times,accel,"mean")
 X<-short$sepx

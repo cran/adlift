@@ -81,7 +81,9 @@ The algorithm continues until as many points as desired are removed.
 \examples{
 #read in multiple point data...
 
-mcdata()
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 
 out<-fwtnpmp(times,accel,LocalPredmp=AdaptPredmp,neighbours=2)
 out$coeff

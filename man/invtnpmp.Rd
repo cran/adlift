@@ -77,7 +77,9 @@ The algorithm continues like this until as many points as desired are added.
 \examples{
 #read in multiple point data...
 
-mcdata()
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 shortf<-adjustx(times,accel)$sepf
 
 out<-fwtnpmp(times,accel,LocalPredmp=CubicPredmp,neighbours=2)

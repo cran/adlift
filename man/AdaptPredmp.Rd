@@ -50,8 +50,9 @@ The procedure performs adaptive regression (through AdaptPred) over the three ty
 \examples{
 #read in data with multiple values...
 
-mcdata()
-
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 short<-adjustx(times,accel,"mean")
 X<-short$sepx
 coeff<-short$sepx

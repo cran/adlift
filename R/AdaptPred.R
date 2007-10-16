@@ -12,7 +12,7 @@ results<-list()
 
 intercept<-FALSE  #does prediction schemes with no intercept
 
-out1<<-LinearPred(pointsin,X,coeff,nbrs,remove,intercept)
+out1<-LinearPred(pointsin,X,coeff,nbrs,remove,intercept)
 pred1<-out1$pred
 out2<-QuadPred(pointsin,X,coeff,nbrs,remove,intercept)
 pred2<-out2$pred

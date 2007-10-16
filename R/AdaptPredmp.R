@@ -12,7 +12,7 @@ d<-matrix(0,1,length(coefflist[[remove]]))
 
 intercept<-FALSE  #does prediction schemes with no intercept
 
-out1<<-LinearPredmp(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g)
+out1<-LinearPredmp(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g)
 pred1<-out1$pred
 out2<-QuadPredmp(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g)
 pred2<-out2$pred

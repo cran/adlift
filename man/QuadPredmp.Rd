@@ -43,8 +43,9 @@ The procedure performs quadratic regression using the given neighbours using an 
 \examples{
 #read in data with multiple values...
 
-mcdata()
-
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 short<-adjustx(times,accel,"mean")
 X<-short$sepx
 coeff<-short$sepx

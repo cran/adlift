@@ -31,13 +31,16 @@ The function compares \env{x} to \command{unique(x)} to find the occurences of r
 \examples{
 #read in the motorcycle crash data 
 #
-mcdata()
+data(motorcycledata)
 
 #
-dim(mcdata)
+dim(motorcycledata)
 
 #check data.
 #
+times<-motorcycledata$time
+accel<-motorcycledata$accel
+
 a<-adjustx(times,accel,"mean")
 #
 #note the repeated values in the original grid data

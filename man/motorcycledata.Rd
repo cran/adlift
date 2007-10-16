@@ -8,7 +8,6 @@ Motorcycle data.
 \references{Hardle, W. (1990) \emph{Applied Nonparametric Regression}. Cambridge University Press.}
 \usage{data(motorcycledata)}
 \format{A 133 by 2 data frame.}
-\seealso{\code{\link{mcdata}}}
 \keyword{datasets}
 
 

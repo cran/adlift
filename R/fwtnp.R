@@ -127,15 +127,15 @@ if (inputtype=="points"){
 		}
 
 
-if (inputtype=="lengths"){
-	l2<-LengthsUpdate(X,coeff,nbrs,index,remove,pointsin,weights,lengths);
-	coeff<-l2$coeff;
-	lengths<-l2$lengths;
-	r<-l2$r;
-	weights<-l2$weights;
-	N<-l2$N;
-	alpha<-l2$alpha;
-		}		
+#if (inputtype=="lengths"){
+#	l2<-LengthsUpdate(X,coeff,nbrs,index,remove,pointsin,weights,lengths);
+#	coeff<-l2$coeff;
+#	lengths<-l2$lengths;
+#	r<-l2$r;
+#	weights<-l2$weights;
+#	N<-l2$N;
+#	alpha<-l2$alpha;
+#		}		
 
 lengthsremove[j]<-lengths[r];
 gamlist[[j]]<-weights

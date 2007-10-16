@@ -43,7 +43,9 @@ The procedure performs cubic regression using the given neighbours using an inte
 \examples{
 #read in data with multiple values...
 
-mcdata()
+data(motorcycledata)
+times<-motorcycledata$time
+accel<-motorcycledata$accel
 
 short<-adjustx(times,accel,"mean")
 X<-short$sepx

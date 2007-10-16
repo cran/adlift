@@ -87,14 +87,8 @@ n<-length(x)
 		linear = 2 * x - 1,
 		quadratic = 4 * (1 - x) * x,
 		cubic = (64 * x * (x - 1) * (x - 0.5))/3,
-		stop(paste("Unknown signal name.  Allowable names are:\n", paste(.wave.demo.signals, 
-			collapse = ", "))))
-	if(snr > 0) z <- z + (rnorm(n) * sqrt(var(z)))/snr	
-	# Version of Splus is greater than 3.2 => use rts
-	#if(version[[8]] >= 2) z <- rts(z, start = 0, deltat = 1/n) else z <- ts(z, start = 0, deltat = 1/n)
-		# Version of Splus is less than 3.1 => use ts
-	
-#print(z)
-#print(y)
+		stop("Unknown signal name.")
+)#switch
+	if(snr > 0) z <- z + (rnorm(n) * sqrt(var(z)))/snr		
 z
 }
