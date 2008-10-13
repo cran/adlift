@@ -36,7 +36,14 @@ rf<-maxf-minf
 
 if (plot.f==TRUE){
 #get(getOption("device"))()
-getOption("device")()	#bug fix for R-2.8.0beta + (see two more instances below) 
+
+cls<-class(getOption("device"))	#bug fix for R-2.8.0beta +  
+if(cls=="function"){
+	getOption("device")()
+}
+else{
+	get(getOption("device"))()
+}
 plot(x,seq(minf,maxf+(rf*.5),length=length(x)),type="n",xlab="",ylab="")
 lines(sort(x),f[order(x)],type="l")
 if(!is.null(schemehist)){
@@ -105,8 +112,13 @@ else{
 if (separate==FALSE){
 
 #get(getOption("device"))()
-getOption("device")()
-				#non platform-specific plot window command
+cls<-class(getOption("device"))	#bug fix for R-2.8.0beta +  
+if(cls=="function"){
+	getOption("device")()
+}
+else{
+	get(getOption("device"))()
+}
 
 plot(x,seq(m,M+((M-m)*.5),length=length(x)),type="n",xlab="x",ylab="basis function")
 newdev<-dev.cur()
@@ -124,8 +136,13 @@ if(schhist[i]=="0"){colour<-5}
 
 if (separate==TRUE){
 #get(getOption("device"))()   
-getOption("device")()
-#produces new plot window
+cls<-class(getOption("device"))	#bug fix for R-2.8.0beta +  
+if(cls=="function"){
+	getOption("device")()
+}
+else{
+	get(getOption("device"))()
+}
 
 plot(x,seq(minb[i],maxb[i]+((maxb[i]-minb[i])*.5),length=length(x)),type="n",xlab="x",ylab="basis function")
 lines(sort(x),basmat[i,][order(x)],type="l",col=colour)
