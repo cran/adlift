@@ -35,7 +35,8 @@ rx<-maxx-minx
 rf<-maxf-minf
 
 if (plot.f==TRUE){
-get(getOption("device"))()
+#get(getOption("device"))()
+getOption("device")()	#bug fix for R-2.8.0beta + (see two more instances below) 
 plot(x,seq(minf,maxf+(rf*.5),length=length(x)),type="n",xlab="",ylab="")
 lines(sort(x),f[order(x)],type="l")
 if(!is.null(schemehist)){
@@ -103,7 +104,8 @@ stop("can't plot requested basis functions")
 else{
 if (separate==FALSE){
 
-get(getOption("device"))()
+#get(getOption("device"))()
+getOption("device")()
 				#non platform-specific plot window command
 
 plot(x,seq(m,M+((M-m)*.5),length=length(x)),type="n",xlab="x",ylab="basis function")
@@ -121,7 +123,9 @@ if(schhist[i]=="0"){colour<-5}
 }
 
 if (separate==TRUE){
-get(getOption("device"))()   #produces new plot window
+#get(getOption("device"))()   
+getOption("device")()
+#produces new plot window
 
 plot(x,seq(minb[i],maxb[i]+((maxb[i]-minb[i])*.5),length=length(x)),type="n",xlab="x",ylab="basis function")
 lines(sort(x),basmat[i,][order(x)],type="l",col=colour)
