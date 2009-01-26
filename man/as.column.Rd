@@ -18,7 +18,7 @@ as.column(x)
 \item{y}{a vector identical to \env{x}, but given as a column.} 
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}}
+\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
 
 \seealso{\code{\link{as.row}}    }
 \examples{

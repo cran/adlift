@@ -24,7 +24,7 @@ fwtnp(input, f, inputtype = "points", nkeep = 2, intercept = TRUE,
   \item{LocalPred}{The type of regression to be performed. Possible options are \code{LinearPred}, \code{QuadPred}, \code{CubicPred}, \code{AdaptPred} and \code{AdaptNeigh}.}
 }
 \details{
-Given \eqn{n} points on a line, \env{input}, each with a corresponding env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
+Given \eqn{n} points on a line, \env{input}, each with a corresponding \env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
 Step One. Order the grid values so that corresponding intervals can be constructed. 
 
 Step Two. Compute "integrals" for each point. For each point its integral is the length of the interval associated to the gridpoint. 
