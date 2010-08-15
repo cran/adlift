@@ -1,5 +1,6 @@
 \name{pts}
 \alias{pts}
+\alias{pts2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{pts}
 \description{
@@ -20,7 +21,7 @@ pts(input)
   \item{X}{the constructed gridpoint vector.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 \seealso{\code{\link{fwtnp}}, \code{\link{fwtnpmp}}     }
 \examples{
 y<-runif(20)

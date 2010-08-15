@@ -1,5 +1,5 @@
 "fwtnpmp" <-
-function(input,f,inputtype="points",nkeep=2,intercept=TRUE,initboundhandl="reflect",updateboundhandl="add",neighbours=1,closest=FALSE,LocalPredmp=LinearPredmp,mpdet="ave"){
+function(input,f,inputtype="points",nkeep=2,intercept=TRUE,initboundhandl="reflect",neighbours=1,closest=FALSE,LocalPredmp=LinearPredmp,mpdet="ave"){
 
 #does the 1D single coefficient lifting transform
 #inputtype determines which procedure to follow in order to apply the transform
@@ -47,10 +47,10 @@ mp[i]<-(length(g[[i]])>1)
 #			}
 if (inputtype=="points"){
 	X<-X;
-	I<-intervals(X,initboundhandl)$i;  #creates interval endpoints with
+	I<-intervals(X,initboundhandl);  #creates interval endpoints with
 				 	   #edge correction
 
-	lengths<-lengthintervals(X,I,type="midpoints",neighbours,closest)$lengths;
+	lengths<-lengthintervals(X,I,type="midpoints",neighbours,closest);
 				    #^^^^^^^^^^^^^^^^^ 
 	origlengths<-lengths
 			}
@@ -202,7 +202,7 @@ else{
 
 
 if (inputtype=="points"){
-	l1<-PointsUpdatemp(X,coefflist,nbrs,newnbrs,index,remove,pointsin,weights,lengths,updateboundhandl);
+	l1<-PointsUpdatemp(X,coefflist,nbrs,newnbrs,index,remove,pointsin,weights,lengths);
 	coefflist<-l1$coeff;
 	lengths<-l1$lengths;
 	r<-l1$r;

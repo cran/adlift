@@ -1,5 +1,6 @@
 \name{denoisehetero}
 \alias{denoisehetero}
+\alias{denoisehetero2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{denoisehetero}
 \description{
@@ -33,7 +34,7 @@ The function uses the transform matrix to normalise the detail coefficients prod
   \item{fhat2}{the estimate of the function after denoising, using the alternate variance estimate of the median of the absolute values of the detail coefficients.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 \seealso{\code{\link{denoise}},  \code{\link{heterovar}}     }
 \examples{

@@ -28,7 +28,7 @@ The function works out the interval endpoints for each gridpoint in \env{removel
 \item{varvec2}{a vector of median absolute deviation values (from the median), centered at zero, for the coefficients in \env{dlist}.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{denoisehetero}}     }
 
@@ -41,7 +41,7 @@ fwd<-fwtnp(x1,y1,LocalPred=AdaptNeigh,neighbours=2)
 #
 y<-fwd$lengthsremove
 rem<-fwd$removelist
-al<-artlev1(y,rem)
+al<-artlev(y,rem)
 #
 yrem<-x1[sort(rem)]
 detail<-fwd$coeff[sort(rem)]

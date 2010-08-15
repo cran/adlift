@@ -1,5 +1,6 @@
 \name{UndoPointsUpdate}
 \alias{UndoPointsUpdate}
+\alias{UndoPointsUpdate2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{UndoPointsUpdate}
 \description{
@@ -32,7 +33,7 @@ UndoPointsUpdate(X, coeff, nbrs, index, remove, r, N, pointsin, gamweights,
   \item{alpha}{the weights used to modify \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{invtnp}}, \code{\link{LinearPred}}, \code{\link{PointsUpdate}},
  \code{\link{QuadPred}}     }
 \examples{
@@ -45,15 +46,14 @@ y <-make.signal2("blocks",x=x)
 #find initial interval lengths...
 #
 I<-intervals(x,"reflect")
-l<-lengthintervals(x,I$intervals,neighbours=2,closest=FALSE)
-lengths<-l$lengths
+lengths<-lengthintervals(x,I,neighbours=2,closest=FALSE)
 #
 #perform prediction step...
 p<-AdaptNeigh(order(x),x,y,32,5,TRUE,2)
 #
 #
 u<-PointsUpdate(x,p$results[[6]],p$newinfo[[3]],p$newinfo[[4]],5,order(x),p$results[[4]],
-lengths,"add")
+lengths)
 #
 p2<-setdiff(order(x),5)
 a<-which(order(x)==5)

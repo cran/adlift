@@ -20,7 +20,7 @@ The function creates \code{length(x)} samples from a uniform[\env{-amount},\env{
 
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 
 \seealso{\code{\link{modjitter}}     }

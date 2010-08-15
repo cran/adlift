@@ -33,7 +33,7 @@ UndoPointsUpdatemp(X, coeff, nbrs, newnbrs, index, remove, r, N, pointsin,
   \item{alpha}{the weights used to modify \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{invtnpmp}}, \code{\link{LinearPredmp}}, \code{\link{PointsUpdatemp}}, \code{\link{QuadPredmp}}     }
 \examples{
 #read in data with multiple values...
@@ -52,8 +52,7 @@ coefflist[[i]]<-accel[g[[i]]]
 }
 
 I<-intervals(X,"reflect")
-l<-lengthintervals(X,I$intervals,neighbours=2,closest=TRUE)
-lengths<-l$lengths
+lengths<-lengthintervals(X,I,neighbours=2,closest=TRUE)
 
 #work out neighbours of point to be removed (31)
 
@@ -80,7 +79,7 @@ newnbrs<-c(newnbrs,rep(nbrs[i],times=length(g[[nbrs[i]]])))
 coefflist[[31]]<-p$results[[6]][31]
 
 u<-PointsUpdatemp(X,coefflist,p$newinfo[[3]],newnbrs,p$newinfo[[4]],31,order(X),p$results[[4]],
-lengths,"add")
+lengths)
 
 p2<-setdiff(order(X),31)
 a<-which(order(X)==31)

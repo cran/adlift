@@ -12,8 +12,9 @@ make.signal2(name, x, snr = Inf, ...)
 \arguments{
   \item{name}{a character string of the test signal to create.}
   \item{x}{a vector of gridpoints.}
-  \item{snr}{}
-  \item{\dots}{}
+  \item{snr}{optional argument to scale the function values according 
+  to a signal-to-noise ratio.}
+  \item{\dots}{any additional arguments.}
 }
 \details{
     This function is based on the \command{make.signal} function included in the \bold{S-Plus wavelets} module, except that the \env{x} vector can be irregular. As well as the signals included for the original version (e.g. the Donoho/Johnstone test signals), a piecewise polynomial can be sampled.
@@ -22,7 +23,7 @@ make.signal2(name, x, snr = Inf, ...)
   \item{z}{the signal function values.}
 }
 \note{The test signals have domain [0,1], so the grid vector \env{x} must have values within this interval.}
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \examples{
 #create grid vector

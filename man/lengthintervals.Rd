@@ -1,5 +1,6 @@
 \name{lengthintervals}
 \alias{lengthintervals}
+%\alias{lengthintervals2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{lengthintervals}
 \description{
@@ -25,7 +26,7 @@ The function computes the interval lengths by finding the differences between th
   \item{initialindex}{If \env{closest=TRUE} and \env{type="average"}, a matrix of dimension \code{length(X)} x \code{neighbours}, showing the indices into \code{order(X)} of the neighbours of each gridpoint. Otherwise is NULL.
 }
 }
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{getnbrs}}, \code{\link{intervals}}     }
 \examples{

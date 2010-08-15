@@ -1,6 +1,4 @@
-"denoisehetero" <-
-function(x,f,pred,neigh,int,clo,keep,rule="median"){
-
+"denoisehetero" <-function(x,f,pred=LinearPred,neigh=1,int=TRUE,clo=FALSE,keep=2,rule="median"){
 
 nonorcoeff<-list()
 nordetlist<-list()
@@ -21,101 +19,74 @@ fhat<-list()
 fhat1<-list()
 fhat2<-list()
 
+n<-length(x)
 temp<-transmatdual(x,f,pred,neigh,int,clo,keep)
 w<-temp$Wnew
 out<-temp$out
 x<-temp$x
 
-print(length(x))
-print(length(out$pointsin))
+po<-out$pointsin
 nonorcoeff<-out$coeff
 lr<-out$lengthsremove    #vector deciding how to divide up coefficients into artificial levels
 rem<-out$removelist      #used to convert output to original lr,rem)
 
-al<-artlev1(lr,rem)      #the list of indices of removelist separated into levels
+al<-artlev(lr,rem)      #the list of indices of removelist separated into levels
 levno<-length(al)
 
 
-y<-matrix(0,1,(length(x)-keep))
-detail<-matrix(0,1,(length(x)-keep))
+detail<-y<-matrix(0,1,n-keep)
 
-y<-x[setdiff((1:length(x)),out$pointsin)]
-detail<-nonorcoeff[setdiff((1:length(x)),out$pointsin)]
+y<-x[setdiff(1:n,po)]
+detail<-nonorcoeff[setdiff(1:n,po)]
 h<-heterovar(y,detail,al)
-
 
 sdvec<-h$varvec
 sdvec1<-h$varvec1
 sdvec2<-h$varvec2
 
-sd<-NULL
-for (i in 1:length(x)){
-if (i<min(out$pointsin)){
-	sd[i]<-sdvec[i]}
-if (i==min(out$pointsin)){
-	sd[i]<-NA}
-if ((i>min(out$pointsin)) & (i<max(out$pointsin))){
-	sd[i]<-sdvec[i-1]}
-if(i==max(out$pointsin)){
-	sd[i]<-NA}
-if(i>max(out$pointsin)){
-	sd[i]<-sdvec[i-2]}
-}
+sd<-sd1<-sd2<-NULL
+m<-min(po)
+M<-max(po)
 
-sd1<-NULL
-for (i in 1:length(x)){
-if (i<min(out$pointsin)){
-	sd1[i]<-sdvec1[i]}
-if (i==min(out$pointsin)){
-	sd1[i]<-NA}
-if ((i>min(out$pointsin)) & (i<max(out$pointsin))){
-	sd1[i]<-sdvec1[i-1]}
-if(i==max(out$pointsin)){
-	sd1[i]<-NA}
-if(i>max(out$pointsin)){
-	sd1[i]<-sdvec1[i-2]}
-}
+#i<m:
+sd[1:(m-1)]<-sdvec[1:(m-1)]
+sd1[1:(m-1)]<-sdvec1[1:(m-1)]
+sd2[1:(m-1)]<-sdvec2[1:(m-1)]
 
-sd2<-NULL
-for (i in 1:length(x)){
-if (i<min(out$pointsin)){
-	sd2[i]<-sdvec2[i]}
-if (i==min(out$pointsin)){
-	sd2[i]<-NA}
-if ((i>min(out$pointsin)) & (i<max(out$pointsin))){
-	sd2[i]<-sdvec2[i-1]}
-if(i==max(out$pointsin)){
-	sd2[i]<-NA}
-if(i>max(out$pointsin)){
-	sd2[i]<-sdvec2[i-2]}
-}
+#i=m, i=M:
+sd[c(m,M)]<-sd1[c(m,M)]<-sd2[c(m,M)]<-NA
+
+#i>m & i<M:
+sd[(m+1):(M-1)]<-sdvec[m:(M-2)]
+sd1[(m+1):(M-1)]<-sdvec1[m:(M-2)]
+sd2[(m+1):(M-1)]<-sdvec2[m:(M-2)]
+
+#i>M:
+sd[(M+1):n]<-sdvec[(M-1):(n-2)]
+sd1[(M+1):n]<-sdvec1[(M-1):(n-2)]
+sd2[(M+1):n]<-sdvec2[(M-1):(n-2)]
 
 for (i in 1:levno){
-nordetlist[[i]]<-nonorcoeff[al[[i]]]/(sd[al[[i]]])
-nordetlist1[[i]]<-nonorcoeff[al[[i]]]/(sd1[al[[i]]])
-nordetlist2[[i]]<-nonorcoeff[al[[i]]]/(sd2[al[[i]]])
+	nordetlist[[i]]<-nonorcoeff[al[[i]]]/(sd[al[[i]]])
+	nordetlist1[[i]]<-nonorcoeff[al[[i]]]/(sd1[al[[i]]])
+	nordetlist2[[i]]<-nonorcoeff[al[[i]]]/(sd2[al[[i]]])
 
-	}
+	nortclist[[i]]<-ebayesthresh(nordetlist[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	nortclist1[[i]]<-ebayesthresh(nordetlist1[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	nortclist2[[i]]<-ebayesthresh(nordetlist2[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
 
-for (i in 1:levno){
-nortclist[[i]]<-ebayesthresh(nordetlist[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
-nortclist1[[i]]<-ebayesthresh(nordetlist1[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
-nortclist2[[i]]<-ebayesthresh(nordetlist2[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
-	}
+	newcoeff[al[[i]]]<-nortclist[[i]]*(sd[al[[i]]])
+	newcoeff1[al[[i]]]<-nortclist1[[i]]*(sd1[al[[i]]])
+	newcoeff2[al[[i]]]<-nortclist2[[i]]*(sd2[al[[i]]])
+}
 
+newcoeff[po]<-out$coeff[po]
+newcoeff1[po]<-out$coeff[po]
+newcoeff2[po]<-out$coeff[po]
 
-for (i in 1:levno){
-newcoeff[al[[i]]]<-nortclist[[i]]*(sd[al[[i]]])
-newcoeff1[al[[i]]]<-nortclist1[[i]]*(sd1[al[[i]]])
-newcoeff2[al[[i]]]<-nortclist2[[i]]*(sd2[al[[i]]])
-		}
-newcoeff[out$pointsin]<-out$coeff[out$pointsin]
-newcoeff1[out$pointsin]<-out$coeff[out$pointsin]
-newcoeff2[out$pointsin]<-out$coeff[out$pointsin]
-
-fhat<-invtnp(x,newcoeff,out$lengths,lr,out$pointsin,rem,out$neighbrs,out$schemehist,out$interhist,length(x)-keep,int,neigh,clo,pred)
-fhat1<-invtnp(x,newcoeff1,out$lengths,lr,out$pointsin,rem,out$neighbrs,out$schemehist,out$interhist,length(x)-keep,int,neigh,clo,pred)
-fhat2<-invtnp(x,newcoeff2,out$lengths,lr,out$pointsin,rem,out$neighbrs,out$schemehist,out$interhist,length(x)-keep,int,neigh,clo,pred)
+fhat<-invtnp(x,newcoeff,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$interhist,n-keep,int,neigh,clo,pred)
+fhat1<-invtnp(x,newcoeff1,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$interhist,n-keep,int,neigh,clo,pred)
+fhat2<-invtnp(x,newcoeff2,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$interhist,n-keep,int,neigh,clo,pred)
 
 return(list(out=out,w=w,al=al,sd=sd,fhat=fhat,fhat1=fhat1,fhat2=fhat2))
 }

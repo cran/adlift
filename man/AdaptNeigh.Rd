@@ -45,7 +45,7 @@ AdaptNeigh(pointsin, X, coeff, nbrs, remove, intercept, neighbours)}
 
 %\note{The \pkg{Matrix} package is needed for this function.} 
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 \seealso{\code{\link{AdaptPred}}, \code{\link{fwtnp}}     }
 
@@ -65,7 +65,7 @@ out<-getnbrs(tx,173,order(tx),2,FALSE)
 #
 an<-AdaptNeigh(order(tx),tx,ty,out$nbrs,173,FALSE,2)
 #
-an[[1]][[8]]
+an[[1]][[7]]
 
 an[[2]][[3]]
 

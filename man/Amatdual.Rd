@@ -1,5 +1,6 @@
 \name{Amatdual}
 \alias{Amatdual}
+\alias{Amatdual2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Amatdual}
 \description{Combines filter matrices to produce a refinement matrix A for a wavelet transform. 
@@ -11,7 +12,7 @@ Amatdual(steps, pointsin, removelist, nbrs, weights, alpha)
 \arguments{
   \item{steps}{a value indicating which refinement matrix to construct. It refers to the number of points already removed during the transform.}
   \item{pointsin}{The indices of gridpoints still to be removed. }
-  \item{removelist}{a vector of indices into \env{X} of the lifted coefficients during the transform (in the order of removal). }
+  \item{removelist}{a vector of indices into env{X} of the lifted coefficients during the transform (in the order of removal). }
   \item{nbrs}{indices of the neighbours used in the last step of the decomposition.}
   \item{weights}{the prediction weights obtained from the regression in the prediction step of the transform.}
   \item{alpha}{the update weights used to update \env{lengths} and \env{coeff}.}
@@ -27,7 +28,7 @@ Amatdual(steps, pointsin, removelist, nbrs, weights, alpha)
 \item{weights}{the prediction weights obtained from the regression in the prediction step of the transform.}
  }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 \seealso{\code{\link{transmatdual}}     }
 \examples{
 #

@@ -4,8 +4,6 @@ function(pointsin,X,coeff,nbrs,remove,intercept,neighbours){
 #does local adaptive prediction for the point remove based on N 
 #points (chooses method of prediction and intercept);
 
-#library(Matrix);
-
 details<-NULL
 results<-list()
 
@@ -27,9 +25,6 @@ pred5<-out5$pred
 out6<-CubicPred(pointsin,X,coeff,nbrs,remove,intercept)
 pred6<-out6$pred
 
-
-
-
 details[1]<-coeff[remove]-pred1
 details[2]<-coeff[remove]-pred2
 details[3]<-coeff[remove]-pred3
@@ -37,62 +32,20 @@ details[4]<-coeff[remove]-pred4
 details[5]<-coeff[remove]-pred5
 details[6]<-coeff[remove]-pred6
 
-
-
 minindex<-order(abs(details))[1]
 pred<-coeff[remove]-details[minindex]
 coeff[remove]<-details[minindex]
-int<-NULL
+int<-TRUE
 scheme<-NULL
 if(minindex<=3){int<-FALSE}
-else{int<-TRUE}
-
 
 if((minindex==1)|(minindex==4)){scheme<-"Linear"}
 if((minindex==2)|(minindex==5)){scheme<-"Quad"}
 if((minindex==3)|(minindex==6)){scheme<-"Cubic"}
 
+wt<-paste("out",minindex,"$weights",sep="")
 
 
-if(minindex==1){
-	for (i in 1:4){
-results[[i]]<-out1[[i]]
-	}
-}
-if(minindex==2){
-	for (i in 1:4){
-results[[i]]<-out2[[i]]
-	}
-}
-if(minindex==3){
-	for (i in 1:4){
-results[[i]]<-out3[[i]]
-	}
-}
-if(minindex==4){
-	for (i in 1:4){
-results[[i]]<-out4[[i]]
-	}
-}
-if(minindex==5){
-	for (i in 1:4){
-results[[i]]<-out5[[i]]
-	}
-}
-if(minindex==6){
-	for (i in 1:4){
-results[[i]]<-out6[[i]]
-	}
-}
+return(list(weights=eval(parse(text=wt)),pred=pred,coeff=coeff,int=int,scheme=scheme,details=details,minindex=minindex))
 
-
-results[[5]]<-pred
-results[[6]]<-coeff
-results[[7]]<-int
-results[[8]]<-scheme
-results[[9]]<-details
-results[[10]]<-minindex
-
-
-results
 }

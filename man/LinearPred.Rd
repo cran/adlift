@@ -31,7 +31,7 @@ The procedure performs linear regression using the given neighbours using an int
 }
 
 %\note{The \pkg{Matrix} is needed for this function.}
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 \seealso{\code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{QuadPred}}
 }

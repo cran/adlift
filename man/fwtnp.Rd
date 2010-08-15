@@ -1,30 +1,33 @@
 \name{fwtnp}
 \alias{fwtnp}
+\alias{fwtnp2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{fwtnp}
 \description{
 Performs the lifting transform on a signal with grid \env{input} and corresponding function values \env{f}. There is a unique correspondence between the grid values and the function values. Can also cope with length vector input instead of gridpoint vector input.
 }
 \usage{
-fwtnp(input, f, inputtype = "points", nkeep = 2, intercept = TRUE,
- initboundhandl = "reflect", updateboundhandl = "add", neighbours = 1,
- closest = FALSE, LocalPred = LinearPred)
+fwtnp(input, f, nkeep = 2, intercept = TRUE,
+ initboundhandl = "reflect", neighbours = 1,
+ closest = FALSE, LocalPred = LinearPred, do.W=FALSE, varonly=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{input}{A vector of grid values. Can be of any length, not necessarily equally spaced.}
   \item{f}{A vector of function values corresponding to \env{input}. Must be of the same length as \env{input}.}
-  \item{inputtype}{A character string, either \env{"points"} to specify that a gridpoint vector is inputted, or \env{"lengths"}, when a vector of interval lengths is used as input.}
   \item{nkeep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two. }
   \item{intercept}{Indicates whether or not the regression curve includes an intercept.}
   \item{initboundhandl}{variable specifying how to handle the boundary at the start of the transform.  Possible values are \code{"reflect"} - the intervals corresponding to the first and last datapoints are taken to have the respective grid values as midpoints; and \code{"stop"} - the first and last intervals have the first and last grid values (respectively) as outer endpoints.}
-  \item{updateboundhandl}{variable specifying how the intervals are changed during the update step of the transform (\code{\link{PointsUpdate}}), when the removed point is on the boundaryy: \code{"reflect"} makes the neighbouring intervals symmetric about the corresponding gridpoints; \code{"stop"} has the neighbouring intervals ending at the gridpoints; \code{"add"} has the neighbouring intervals having outer endpoints where the boundary intervals did.}
   \item{neighbours}{The number of neighbours over which the regression is performed at each step. If closest is false, then this in fact denotes the number of neighbours on each side of the removed point.}
   \item{closest}{Refers to the configuration of the chosen neighbours. If \env{closest} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
   \item{LocalPred}{The type of regression to be performed. Possible options are \code{LinearPred}, \code{QuadPred}, \code{CubicPred}, \code{AdaptPred} and \code{AdaptNeigh}.}
+  \item{do.W}{A boolean indicating whether the transform matrix should 
+  be computed and returned.}
+  \item{varonly}{A boolean indicating whether only the coefficient 
+  variances should be returned (if \code{do.W=TRUE}).}
 }
 \details{
-Given \eqn{n} points on a line, \env{input}, each with a corresponding \env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
+Given \eqn{n} points on a line, \env{input}, each with a corresponding env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
 Step One. Order the grid values so that corresponding intervals can be constructed. 
 
 Step Two. Compute "integrals" for each point. For each point its integral is the length of the interval associated to the gridpoint. 
@@ -37,7 +40,15 @@ Step Four(b). The integrals and the scaling function values (other \env{coeff} v
 
 Step Five. Return to step 3 but in the identification of a point to remove the updated integrals are used. 
 
-The algorithm continues until as many points as desired are removed. 
+The algorithm continues until as many points as desired are removed.  If 
+\code{do.W=TRUE}, the predict and update lifting steps are used to 
+propogate coefficient contributions to the transform matrix \code{W}.  
+If \code{varonly=TRUE}, only the (detail and scaling) coefficient 
+variances are returned.  After each lifting step, the 
+coefficient variance is computed and the transform matrix 
+row corresponding to the lifted coefficient is deleted for the 
+next stage (minimal storage efficiency).  The transform matrix is not 
+returned (i.e. \code{W=NULL}). 
 }
 \value{
 \item{X}{data vector of the grid used in the transform.}
@@ -45,32 +56,18 @@ The algorithm continues until as many points as desired are removed.
 \item{origlengths}{vector of initial interval lengths corresponding to the gridpoints.}
 \item{lengths}{vector of (updated) interval lengths at the end of the transform. This is of length \env{nkeep}.}
 \item{lengthsremove}{vector of interval lengths corresponding to the points removed during the transform (in \env{removelist}).}
-%\item{weights}{the prediction (regression) weights used in the last step of the transform.}
 \item{pointsin}{indices into \env{X} of the scaling coefficients in the wavelet decomposition. These are the indices of the \env{X} values which remain after all points in \env{removelist} have been predicted and removed. This has length \env{nkeep}.}
 \item{removelist}{a vector of indices into \env{X} of the lifted coefficients during the transform (in the order of removal).}
 \item{neighbrs}{a list of indices into \env{X}. Each list entry gives the indices of the neighbours of the removed point used at that particular step of the transform.}
-%\item{nbrs}{indices of the neighbours used in the last step of the decomposition.}
-%\item{r}{the index of the removed point as it appears in env{pointsin}.}
-%\item{N}{\code{length(pointsin)}}
-%\item{alpha}{the update weights for the last step of the transform.}
-%\item{pred}{the predicted function value of the last removed point. }
-%\item{bhat}{the regression coefficients in the last prediction step.}
 \item{neighbours}{the user-specified number of neighbours used in the prediction step of the transform.}
 \item{gamlist}{a list of all the prediction weights used at each step of the transform.}
-%\item{predlist}{a list of the predicted functions values used at each step of the transform.}
 \item{alphalist}{a list of the update coefficients used in the update step of the decomposition.}
-%\item{lengthlist}{a list showing how the interval lengths change over the course of the decomposition.}
 \item{schemehist}{a vector of character strings indicating the type of regression used at each step of the transform.}
 \item{interhist}{a boolean vector indicating whether or not an intercept was used in the regression curve at each step.}
-%\item{detailslist}{a vector of the detail coefficients produced from the prediction steps of the transform.}
 \item{clolist}{a boolean vector showing whether or not the neighbours were symmetrical (FALSE) about the removed point during the transform. This is NULL except when \code{LocalPred=AdaptNeigh}.}
-%\item{minindexlist}{a vector indicating which configuration of neighbours was used at each step. Each component is a value between 1 and 3*\env{neighbours}. If the value is between 1 and \env{neighbours}, then value symmetrical neighbours were used. Otherwise, (value - \env{neighbours}) closest neighbours were used. This is NULL except when \code{LocalPred=AdaptNeigh}.}
-%\item{indiceslist}{a list indicating the prediction scheme (Linear, Quad, Cubic and intercept TRUE or FALSE chosen by \command{AdaptPred}) corresponding to each of the details in \env{mindetailslist}. If the value is between 1 and 3, then no intercept was used in the prediction. Larger values indicate that an intercept was used in the prediction. Values of 1 and 4 represent Linear prediction, 2 and 5 represent Quadratic prediction, 3 and 6 represent Cubic prediction. This is NULL except when \code{LocalPred=AdaptNeigh}.}
-%\item{history}{a list of pairs of indices from \env{indiceslist} and \env{minindexlist}. The first number is the type of regression used, and the second indicates the neighbour configuration which results in the minimum detail coefficient.}
-
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina.Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina.Knight}
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{fwtnpmp}}, \code{\link{invtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}     }
 \examples{

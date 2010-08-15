@@ -7,7 +7,7 @@ Performs the lifting transform on a signal with grid \env{input} and correspondi
 }
 \usage{
 fwtnpmp(input, f, inputtype = "points", nkeep = 2, intercept = TRUE,
- initboundhandl = "reflect", updateboundhandl = "add", neighbours = 1,
+ initboundhandl = "reflect", neighbours = 1,
  closest = FALSE, LocalPredmp = LinearPredmp, mpdet="ave")
 }
 %- maybe also 'usage' for other objects documented here.
@@ -18,7 +18,6 @@ fwtnpmp(input, f, inputtype = "points", nkeep = 2, intercept = TRUE,
   \item{nkeep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two. }
   \item{intercept}{Indicates whether or not the regression curve includes an intercept.}
   \item{initboundhandl}{variable specifying how to handle the boundary at the start of the transform.  Possible values are \code{"reflect"} - the intervals corresponding to the first and last datapoints are taken to have the respective grid values as midpoints; and \code{"stop"} - the first and last intervals have the first and last grid values (respectively) as outer endpoints.}
-  \item{updateboundhandl}{variable specifying how the intervals are changed during the update step of the transform (\code{\link{PointsUpdate}}), when the removed point is on the boundaryy: \code{"reflect"} makes the neighbouring intervals symmetric about the corresponding gridpoints; \code{"stop"} has the neighbouring intervals ending at the gridpoints; \code{"add"} has the neighbouring intervals having outer endpoints where the boundary intervals did.}
   \item{neighbours}{The number of neighbours over which the regression is performed at each step. If closest is false, then this in fact denotes the number of neighbours on each side of the removed point.}
   \item{closest}{Refers to the configuration of the chosen neighbours. If \env{closest} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
   \item{LocalPredmp}{The type of regression to be performed. Possible options are \code{LinearPredmp}, \code{QuadPredmp}, \code{CubicPredmp}, \code{AdaptPredmp} and \code{AdaptNeighmp}.}
@@ -74,7 +73,7 @@ The algorithm continues until as many points as desired are removed.
 \item{mp}{a boolean vector of which of the groups are actually multiple points.}
 } 
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina.Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina.Knight}
 
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{fwtnp}}, \code{\link{invtnpmp}}, \code{\link{LinearPredmp}}, \code{\link{QuadPredmp}}     }
 

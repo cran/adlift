@@ -33,7 +33,7 @@ nonorcoeff<-out$coeff
 lr<-out$lengthsremove    #vector deciding how to divide up coefficients into artificial levels
 rem<-out$removelist      #used to convert output to original lr,rem)
 
-al<-artlev1(lr,rem)      #the list of indices of removelist separated into levels
+al<-artlev(lr,rem)      #the list of indices of removelist separated into levels
 levno<-length(al)
 
 y<-matrix(0,1,(length(xnew)-keep))

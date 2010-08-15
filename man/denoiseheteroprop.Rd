@@ -1,5 +1,6 @@
 \name{denoiseheteroprop}
 \alias{denoiseheteroprop}
+\alias{denoiseheteroprop2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{denoiseheteroprop}
 \description{
@@ -33,7 +34,7 @@ The function uses the transform matrix to normalise the detail coefficients prod
   \item{fhat}{the estimate of the function after denoising.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 \seealso{\code{\link{denoise}}   }
 \examples{

@@ -1,5 +1,6 @@
 \name{intervals}
 \alias{intervals}
+\alias{intervals2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{intervals}
 \description{
@@ -21,7 +22,7 @@ The function constructs the intervals by sorting the observed gridpoints. The en
 \item{order}{\code{order(X)} (the sorted observation order).}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{lengthintervals}}     }
 \examples{

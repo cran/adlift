@@ -1,13 +1,13 @@
 \name{PointsUpdate}
 \alias{PointsUpdate}
+\alias{PointsUpdate2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{PointsUpdate}
 \description{
 This function performs the update lifting step using a given configuration of neighbours and boundary handling.   
 }
 \usage{
-PointsUpdate(X, coeff, nbrs, index, remove, pointsin, weights, lengths,
- updateboundhandl)
+PointsUpdate(X, coeff, nbrs, index, remove, pointsin, weights, lengths)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,7 +19,6 @@ PointsUpdate(X, coeff, nbrs, index, remove, pointsin, weights, lengths,
   \item{pointsin}{The indices of gridpoints still to be removed.}
   \item{weights}{the prediction weights obtained from the regression in the prediction step of the transform.}
   \item{lengths}{the vector of interval lengths at the present step of the transform (to be updated).}
-  \item{updateboundhandl}{boundary handling in the update step. Possible values are \code{"reflect"}, \code{"stop"} and \code{"add"}. If the point to be removed is at the boundary, \code{"reflect"} updates the neighbour interval to be symmetrical about its gridpoint; \code{"stop"} extends its length up until the boundary gridpoint; and \code{"add"} increases its interval length by the interval length associated to the removed boundary point.}
 }
 \details{
 The procedure performs a minimum norm update lifting step. Firstly the interval lengths are updated using the coefficients obtained. Secondly, the scaling and detail coefficient vector is modified using the new interval lengths.
@@ -34,7 +33,7 @@ The procedure performs a minimum norm update lifting step. Firstly the interval 
 
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}, \code{\link{UndoPointsUpdate}}      }
 \examples{
@@ -47,15 +46,14 @@ y <-make.signal2("blocks",x=x)
 #find initial interval lengths...
 #
 I<-intervals(x,"reflect")
-l<-lengthintervals(x,I$intervals,neighbours=2,closest=FALSE)
-lengths<-l$lengths
+lengths<-lengthintervals(x,I,neighbours=2,closest=FALSE)
 #
 #perform prediction step...
 p<-AdaptNeigh(order(x),x,y,32,5,TRUE,2)
 #
 #
 u<-PointsUpdate(x,p$results[[6]],p$newinfo[[3]],p$newinfo[[4]],5,order(x),p$results[[4]],
-lengths,"add")
+lengths)
 #
 #and here are the updated coefficients...
 u$coeff

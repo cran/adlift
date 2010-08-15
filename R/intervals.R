@@ -25,5 +25,7 @@ if (initboundhandl=="stop"){
 intervals[1]<-X[1];
 intervals[n+1]<-X[n];
 		}
-return(list(intervals=intervals,order=order));
+#return(list(intervals=intervals,order=order));
+return(intervals)
+
 }

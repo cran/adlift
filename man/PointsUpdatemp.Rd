@@ -6,8 +6,8 @@
 This function performs the update lifting step using a given configuration of neighbours and boundary handling.   
 }
 \usage{
-PointsUpdatemp(X, coeff, nbrs, newnbrs, index, remove, pointsin, weights, lengths,
- updateboundhandl)
+PointsUpdatemp(X, coeff, nbrs, newnbrs, index, remove, pointsin, 
+weights, lengths)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,7 +20,6 @@ PointsUpdatemp(X, coeff, nbrs, newnbrs, index, remove, pointsin, weights, length
   \item{pointsin}{The indices of gridpoints still to be removed.}
   \item{weights}{the prediction weights obtained from the regression in the prediction step of the transform.}
   \item{lengths}{the vector of interval lengths at the present step of the transform (to be updated).}
-  \item{updateboundhandl}{boundary handling in the update step. Possible values are \code{"reflect"}, \code{"stop"} and \code{"add"}. If the point to be removed is at the boundary, \code{"reflect"} updates the neighbour interval to be symmetrical about its gridpoint; \code{"stop"} extends its length up until the boundary gridpoint; and \code{"add"} increases its interval length by the interval length associated to the removed boundary point.}
 }
 \details{
 The procedure performs a minimum norm update lifting step. Firstly the interval lengths are updated using the coefficients obtained. Secondly, the scaling and detail coefficient list is modified using the new interval lengths.
@@ -34,7 +33,7 @@ The procedure performs a minimum norm update lifting step. Firstly the interval 
   \item{alpha}{the update weights used to update \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{fwtnpmp}}, \code{\link{LinearPredmp}},
  \code{\link{QuadPredmp}}, \code{\link{UndoPointsUpdatemp}}      }
@@ -57,8 +56,7 @@ coefflist[[i]]<-accel[g[[i]]]
 }
 
 I<-intervals(X,"reflect")
-l<-lengthintervals(X,I$intervals,neighbours=2,closest=TRUE)
-lengths<-l$lengths
+lengths<-lengthintervals(X,I,neighbours=2,closest=TRUE)
 
 #work out neighbours of point to be removed (31)
 
@@ -87,8 +85,7 @@ newnbrs
 
 coefflist[[31]]<-p$results[[6]][31]
 
-u<-PointsUpdatemp(X,coefflist,p$newinfo[[3]],newnbrs,p$newinfo[[4]],31,order(X),p$results[[4]]
-,lengths,"add")
+u<-PointsUpdatemp(X,coefflist,p$newinfo[[3]],newnbrs,p$newinfo[[4]],31,order(X),p$results[[4]],lengths)
 #
 #and here is the updated coefficient list...
 u$coeff

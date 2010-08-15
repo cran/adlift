@@ -1,5 +1,7 @@
 \name{transmatdual}
 \alias{transmatdual}
+\alias{transmatdual2}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{transmatdual}
 \description{
@@ -7,7 +9,7 @@ Works out the transform matrix for a particular prediction scheme and neighbourh
 }
 \usage{
 transmatdual(x, f, Pred = AdaptNeigh, neigh = 1, int = TRUE, clo = TRUE,
- keep = 2)
+ keep = 2,varonly=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,6 +20,9 @@ transmatdual(x, f, Pred = AdaptNeigh, neigh = 1, int = TRUE, clo = TRUE,
   \item{int}{Indicates whether or not the regression curve includes an intercept.}
   \item{clo}{Refers to the configuration of the chosen neighbours. If \env{clo} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
   \item{keep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two.}
+  \item{varonly}{A boolean variable indicating whether only the 
+  coefficient variances should be returned, i.e. just the diagonal of 
+  the transform matrix \code{Wnew}.}
 }
 \details{
  The function uses \command{Amatdual} to form the refinement matrices \eqn{A_j}, from which the augmented matrices \eqn{T_j} are constructed. This process is iterated, to find the transform matrix (the top level augmented matrix). The rows and columns of this matrix are then reordered to be in the order of \code{out$coeff}, i.e. so that the columns correspond to \eqn{f_1 \dots f_n}.
@@ -28,7 +33,7 @@ transmatdual(x, f, Pred = AdaptNeigh, neigh = 1, int = TRUE, clo = TRUE,
   \item{x}{the original gridpoint vector. }
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{Amatdual}}     }
 \examples{

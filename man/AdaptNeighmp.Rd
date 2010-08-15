@@ -50,7 +50,7 @@ The procedure performs adaptive regression (through \command{AdaptPred}) over th
 
 %\note{The \pkg{Matrix} package is needed for this function.} 
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
 \seealso{\code{\link{AdaptPredmp}}, \code{\link{fwtnpmp}}     }
 

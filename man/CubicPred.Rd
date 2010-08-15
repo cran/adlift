@@ -31,7 +31,7 @@ CubicPred(pointsin, X, coeff, nbrs, remove, intercept, neighbours)
 
 }
 
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 %\note{The \pkg{Matrix} package is needed for this function. }
 
 \seealso{\code{\link{fwtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}     }

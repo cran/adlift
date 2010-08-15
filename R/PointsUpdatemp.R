@@ -1,5 +1,5 @@
 "PointsUpdatemp" <-
-function(X,coeff,nbrs,newnbrs,index,remove,pointsin,weights,lengths,updateboundhandl){
+function(X,coeff,nbrs,newnbrs,index,remove,pointsin,weights,lengths){
 
 #does the update lifting step based on nbrs of remove
 
@@ -42,7 +42,7 @@ else{
 #			}
 #				};  #end stop
 #
-	if(updateboundhandl=="add"){
+#	if(updateboundhandl=="add"){
 
 		if(r==1){
 			lengths[2]<-lengths[2]+lengths[1];
@@ -50,7 +50,7 @@ else{
 		if(r==N){
 			lengths[N-1]<-lengths[N-1]+lengths[N];
 			}
-				};  #end add
+#				};  #end add
 
     }  #end else
 

@@ -35,7 +35,7 @@ AdaptPred(pointsin, X, coeff, nbrs, remove, intercept, neighbours)
 }
 
 %\note{The \pkg{Matrix} package is needed for this function.}
-\author{Matt Nunes (\email{matt.nunes@bristol.ac.uk}), Marina Popa (\email{Marina.Popa@bristol.ac.uk})}
+\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}    }
@@ -57,14 +57,13 @@ out<-getnbrs(tx,173,order(tx),2,FALSE)
 #
 ap<-AdaptPred(order(tx),tx,ty,out$nbrs,173,FALSE,2)
 #
-ap[[10]]
+#the detail coefficient:
+ap[[3]]
 
-#this corresponds to no intercept and highest order regression (Cubic)...
-#
-#and let's check it...
-ap[[7]]
+#and let's check the scheme used:
+ap[[4]]
 
-ap[[8]]
+ap[[5]]
 
 
 

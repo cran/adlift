@@ -1,20 +1,12 @@
 "condno" <-
 function(W, type){
 
-type<-type[1]	#only takes first letter as type
-
-#	library(Matrix)
-	W <- as.matrix(W)
-	Winv <- Rmatsolve(W)
-#	Winv <- solve.Matrix(W)
-	if (type=="l1"){
-		n1<-sum(abs(W))
-		n2<-sum(abs(Winv))
-		}
-#else{
-#	n1 <- norm.Matrix(W, type = type)
-#	n2 <- norm.Matrix(Winv, type = type)
-#		}
+W <- as.matrix(W)
+Winv <- Rmatsolve(W)
+if (type=="l1"){
+	n1<-sum(abs(W))
+	n2<-sum(abs(Winv))
+	}
 
 if(type=="1" | type=="o" | type=="O"){
 	n1<-max(abs(apply(W,2,sum)))
@@ -35,6 +27,6 @@ if(type=="m" | type=="M"){
 	n2<-max(abs(Winv))
 		}
 
-	condno <- n1 * n2
-	condno
+condno <- n1 * n2
+condno
 }

@@ -14,7 +14,6 @@ newinfo<-list()
 nlist<-list()
 
 N<-length(pointsin);
-r<-which(pointsin==remove);
 
 min1<-min(N-1,neighbours)
 min2<-min(N-1,2*neighbours)
@@ -49,8 +48,8 @@ tempres[[k+min1]]<-out2
 
 
 for (i in 1:(min1+min2)){
-minindices[i]<-tempres[[i]][[10]]
-mindetails[i]<-tempres[[i]][[9]][minindices[i]]
+minindices[i]<-tempres[[i]]$minindex
+mindetails[i]<-tempres[[i]]$details[minindices[i]]
 }
 
 totalminindex<-order(abs(mindetails))[1]
