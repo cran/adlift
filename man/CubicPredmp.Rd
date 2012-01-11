@@ -6,8 +6,8 @@
 This function performs the prediction lifting step using a cubic regression curve given a configuration of neighbours, for multiple point data.
 }
 \usage{
-CubicPredmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, intercept,
- neighbours, mpdet, g)
+CubicPredmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, 
+intercept, neighbours, mpdet, g)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,7 +28,7 @@ The procedure performs cubic regression using the given neighbours using an inte
 }
 \value{
 \item{Xneigh}{matrix of X values corresponding to the neighbours of the removed point. The matrix consists of the column X[newnbrs] augmented with a column of ones if an intercept is used. Refer to any reference on linear regression for more details.}
-\item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T}.}
+\item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \cr \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T}.}
 \item{bhat}{The regression coefficients used in prediction.}
 \item{weights}{the prediction weights for the neighbours.}
 \item{pred}{the predicted function value obtained from the regression.}

@@ -23,7 +23,7 @@ The procedure performs linear regression using the given neighbours using an int
 }
 \value{
 \item{Xneigh}{matrix of X values corresponding to the neighbours of the removed point. The matrix consists of the column X[nbrs] augmented with a column of ones if an intercept is used. Refer to any reference on linear regression for more details.}
-\item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T}.}
+\item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \cr \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T}.}
 \item{bhat}{The regression coefficients used in prediction.}
 \item{weights}{the prediction weights for the neighbours.}
 \item{pred}{the predicted function value obtained from the regression.}

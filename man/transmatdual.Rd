@@ -33,9 +33,15 @@ transmatdual(x, f, Pred = AdaptNeigh, neigh = 1, int = TRUE, clo = TRUE,
   \item{x}{the original gridpoint vector. }
 }
 
+\note{ This function has been left in the package for completeness.  However, the transform matrix is (optionally) computed within the forward lifting 
+transform function \code{\link{fwtnp}}.
+}
+
+\seealso{\code{\link{fwtnp}}, \code{\link{Amatdual}}     }
+
+
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
-\seealso{\code{\link{Amatdual}}     }
 \examples{
 x1<-runif(10)
 y1<-make.signal2("doppler",x=x1)

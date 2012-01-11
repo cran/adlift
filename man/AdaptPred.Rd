@@ -5,7 +5,8 @@
 \description{This function performs the prediction lifting step over intercept and regression order.
 }
 \usage{
-AdaptPred(pointsin, X, coeff, nbrs, remove, intercept, neighbours)
+AdaptPred(pointsin, X, coeff, nbrs, remove, intercept, 
+neighbours)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,9 +22,9 @@ AdaptPred(pointsin, X, coeff, nbrs, remove, intercept, neighbours)
      The procedure performs adaptive regression (through AdaptPred) over the three types of regression and also over intercept.  The combination (type of regression, intercept) is chosen which gives the smallest detail coefficient (in absolute value).   
 }
 \value{
-   \item{results.}{\emph{This is a ten item list giving the regression information chosen from the detail coefficient minimisation:}} 
+  \strong{results.} This is a ten item list giving the regression information chosen from the detail coefficient minimisation:
   \item{Xneigh}{matrix of \env{X} values corresponding to the neighbours of the removed point. The matrix consists of columns \eqn{1,X[nbrs],X[nbrs]^2,...} depending on the order of the prediction used and whether or not an intercept is used. Refer to any reference on linear regression for more details. }
-  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T} . }
+  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \cr \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T} . }
   \item{bhat}{The regression coefficients used in prediction. }
   \item{weights}{the prediction weights for the neighbours. }
   \item{pred}{the predicted function value obtained from the regression. }
@@ -31,7 +32,7 @@ AdaptPred(pointsin, X, coeff, nbrs, remove, intercept, neighbours)
   \item{int}{if TRUE, an intercept was used in the regression. }
   \item{scheme}{a character vector denoting the type of regression used in the prediction ("Linear", "Quad" or "Cubic"). }
   \item{details}{a vector of the detail coefficients from which \command{AdaptPred} selects the minimum value. There are six entries. The first three entries represent the detail coefficients from regression with no intercept in increasing order of prediction. The second three details are values for regression with intercept. }
-\item{minindex}{the index into details (\env{results[[9]]}) which produces the minimum value.}
+  \item{minindex}{the index into details (\env{results[[9]]}) which produces the minimum value.}
 }
 
 %\note{The \pkg{Matrix} package is needed for this function.}

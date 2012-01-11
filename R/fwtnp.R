@@ -24,12 +24,16 @@ function (input, f, nkeep = 2, intercept = TRUE, initboundhandl = "reflect",
     pointsin <- pointsin[order(X)]
     coeff <- f
     matno <- n - nkeep
-    W <- v<-NULL
-    if (do.W) {
+    W <- v <- NULL
+   if ((do.W == 1) & (varonly == 1)) {
+        varonly <- FALSE
+    }
+    ex <- do.W + varonly
+    if (ex == 1) {
         W <- diag(n)
-        if(varonly){
-	        v<-rep(1,times=n)
-	}        
+    }
+    if (varonly) {
+        v <- rep(1, times = n)
     }
     for (j in 1:matno) {
         remove <- order(lengths)[1]
@@ -42,10 +46,9 @@ function (input, f, nkeep = 2, intercept = TRUE, initboundhandl = "reflect",
             neighbours)
         if (length(res) == 2) {
             l <- res[[1]]
-            newinfo <- res[[2]]
-            nbrs <- newinfo[[3]]
-            index <- newinfo[[4]]
-            clolist[j] <- newinfo[[1]]
+            clolist[j] <- res[[2]][[1]]
+            nbrs <- res[[2]][[2]]
+            index <- res[[2]][[3]]
         }
         else {
             l <- res
@@ -72,18 +75,20 @@ function (input, f, nkeep = 2, intercept = TRUE, initboundhandl = "reflect",
         weights <- l1$weights
         N <- l1$N
         alpha <- l1$alpha
-        if (do.W) {
-	        if(varonly){
-	            W[r, ] <- W[r, ] - apply(as.vector(weights) * matrix(W[index, ], nrow = length(nbrs)), 2, sum)
-	            W[index, ] <- W[index, ] + matrix(alpha) %*% W[r, ]
-	            v[remove]<-sum(W[r,]^2)
-	            np<-setdiff(1:length(pointsin),r)
-		    W<-W[np,]	
-	        }
-	        else{
-	            W[remove, ] <- W[remove, ] - apply(as.vector(weights) * matrix(W[nbrs, ], nrow = length(nbrs)), 2, sum)
-	            W[nbrs, ] <- W[nbrs, ] + matrix(alpha) %*% W[remove, ]
-	        }
+        if (ex) {
+            if (varonly) {
+                W[r, ] <- W[r, ] - colSums(as.vector(weights) * matrix(W[index, ], nrow = length(nbrs)))
+                W[index, ] <- W[index, ] + matrix(alpha) %*% 
+                  W[r, ]
+                v[remove] <- sum(W[r, ]^2)
+                np <- setdiff(1:length(pointsin), r)
+                W <- W[np, ]
+            }
+            else {
+                W[remove, ] <- W[remove, ] - colSums(as.vector(weights) * matrix(W[nbrs, ], nrow = length(nbrs)))
+                W[nbrs, ] <- W[nbrs, ] + matrix(alpha) %*% W[remove, 
+                  ]
+            }
         }
         lengthsremove[j] <- lengths[r]
         gamlist[[j]] <- weights
@@ -93,16 +98,15 @@ function (input, f, nkeep = 2, intercept = TRUE, initboundhandl = "reflect",
         lengths <- lengths[setdiff(1:length(pointsin), r)]
         pointsin <- setdiff(pointsin, remove)
     }
-    if(varonly){
-    	v[pointsin]<-apply(W^2,1,sum)
-    	W<-NULL
+    if (varonly) {
+        v[pointsin] <- rowSums(W^2)
+        W <- NULL
     }
-    
     N <- length(pointsin)
-    return(list(X = X, coeff = coeff, origlengths = origlengths, 
-        lengths = lengths, lengthsremove = lengthsremove, pointsin = pointsin, 
-        removelist = removelist, neighbrs = neighbrs, neighbours = neighbours, 
-        schemehist = schemehist, interhist = interhist, clolist = clolist, 
-        gamlist = gamlist, alphalist = alphalist, W = W,v=v))
+    return(list(x = input, coeff = coeff, lengths = lengths, 
+        lengthsremove = lengthsremove, pointsin = pointsin, removelist = removelist, 
+        neighbrs = neighbrs, schemehist = schemehist, interhist = interhist, 
+        clolist = clolist, gamlist = gamlist, alphalist = alphalist, 
+        W = W, v = v))
 }
 

@@ -52,8 +52,7 @@ lengths<-lengthintervals(x,I,neighbours=2,closest=FALSE)
 p<-AdaptNeigh(order(x),x,y,32,5,TRUE,2)
 #
 #
-u<-PointsUpdate(x,p$results[[6]],p$newinfo[[3]],p$newinfo[[4]],5,order(x),p$results[[4]],
-lengths)
+u<-PointsUpdate(x,p$results[[6]],p$newinfo[[2]],p$newinfo[[3]],5,order(x),p$results[[4]],lengths)
 #
 #and here are the updated coefficients...
 u$coeff

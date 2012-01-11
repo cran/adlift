@@ -7,9 +7,9 @@
 Performs the lifting transform on a signal with grid \env{input} and corresponding function values \env{f}. There is a unique correspondence between the grid values and the function values. Can also cope with length vector input instead of gridpoint vector input.
 }
 \usage{
-fwtnp(input, f, nkeep = 2, intercept = TRUE,
- initboundhandl = "reflect", neighbours = 1,
- closest = FALSE, LocalPred = LinearPred, do.W=FALSE, varonly=FALSE)
+fwtnp(input, f, nkeep = 2, intercept = TRUE, 
+initboundhandl = "reflect", neighbours = 1, closest = FALSE, 
+LocalPred = LinearPred, do.W=FALSE, varonly=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -51,7 +51,7 @@ next stage (minimal storage efficiency).  The transform matrix is not
 returned (i.e. \code{W=NULL}). 
 }
 \value{
-\item{X}{data vector of the grid used in the transform.}
+\item{x}{data vector of the grid used in the transform.}
 \item{coeff}{vector of detail and scaling coefficients in the wavelet decomposition of the signal.}
 \item{origlengths}{vector of initial interval lengths corresponding to the gridpoints.}
 \item{lengths}{vector of (updated) interval lengths at the end of the transform. This is of length \env{nkeep}.}
@@ -64,7 +64,7 @@ returned (i.e. \code{W=NULL}).
 \item{alphalist}{a list of the update coefficients used in the update step of the decomposition.}
 \item{schemehist}{a vector of character strings indicating the type of regression used at each step of the transform.}
 \item{interhist}{a boolean vector indicating whether or not an intercept was used in the regression curve at each step.}
-\item{clolist}{a boolean vector showing whether or not the neighbours were symmetrical (FALSE) about the removed point during the transform. This is NULL except when \code{LocalPred=AdaptNeigh}.}
+\item{clolist}{a boolean vector showing whether or not the neighbours were symmetrical \cr (FALSE) about the removed point during the transform. This is NULL except when \code{LocalPred=AdaptNeigh}.}
 }
 
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina.Knight}

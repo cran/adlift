@@ -6,21 +6,20 @@
 Performs the lifting transform on a signal with grid \env{input} and corresponding function values \env{f}, where f has multiple points, that is, more than one function value for (some of) the grid values. 
 }
 \usage{
-fwtnpmp(input, f, inputtype = "points", nkeep = 2, intercept = TRUE,
+fwtnpmp(input, f,  nkeep = 2, intercept = TRUE,
  initboundhandl = "reflect", neighbours = 1,
- closest = FALSE, LocalPredmp = LinearPredmp, mpdet="ave")
+ closest = FALSE, LocalPred = LinearPredmp, mpdet="ave")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{input}{A vector of grid values. Can be of any length, not necessarily equally spaced.}
   \item{f}{A vector of function values corresponding to \env{input}. Must be of the same length as \env{input}.}
-  \item{inputtype}{A character string, either \env{"points"} to specify that a gridpoint vector is inputted, or \env{"lengths"}, when a vector of interval lengths is used as input.}
   \item{nkeep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two. }
   \item{intercept}{Indicates whether or not the regression curve includes an intercept.}
   \item{initboundhandl}{variable specifying how to handle the boundary at the start of the transform.  Possible values are \code{"reflect"} - the intervals corresponding to the first and last datapoints are taken to have the respective grid values as midpoints; and \code{"stop"} - the first and last intervals have the first and last grid values (respectively) as outer endpoints.}
   \item{neighbours}{The number of neighbours over which the regression is performed at each step. If closest is false, then this in fact denotes the number of neighbours on each side of the removed point.}
   \item{closest}{Refers to the configuration of the chosen neighbours. If \env{closest} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
-  \item{LocalPredmp}{The type of regression to be performed. Possible options are \code{LinearPredmp}, \code{QuadPredmp}, \code{CubicPredmp}, \code{AdaptPredmp} and \code{AdaptNeighmp}.}
+  \item{LocalPred}{The type of regression to be performed. Possible options are \code{LinearPredmp}, \code{QuadPredmp}, \code{CubicPredmp}, \code{AdaptPredmp} and \code{AdaptNeighmp}.}
   \item{mpdet}{how the mutiple point detail coefficients are computed.  Possible values are "ave", in which the multiple detail coefficients produced when performing the multiple predictions are averaged, or "min", where the overall minimum detail coefficient is taken.}
 }
 \details{
@@ -41,7 +40,7 @@ Step Five. Return to step 3 but in the identification of a point to remove the u
 The algorithm continues until as many points as desired are removed.    
 }
 \value{
-\item{X}{data vector of the grid used in the transform.}
+\item{x}{data vector of the grid used in the transform.}
 \item{coeff}{vector of detail and scaling coefficients in the wavelet decomposition of the signal.}
 \item{coefflist}{list of detail and scaling coefficients.  Should be the same as \env{coeff}, apart from possible multiple points at the scaling function values.}
 \item{origlengths}{vector of initial interval lengths corresponding to the gridpoints.}
@@ -65,7 +64,7 @@ The algorithm continues until as many points as desired are removed.
 \item{schemehist}{a vector of character strings indicating the type of regression used at each step of the transform.}
 \item{interhist}{a boolean vector indicating whether or not an intercept was used in the regression curve at each step.}
 %\item{detailslist}{a vector of the detail coefficients produced from the prediction steps of the transform.}
-\item{clolist}{a boolean vector showing whether or not the neighbours were symmetrical (FALSE) about the removed point during the transform. This is NULL except when \code{LocalPred=AdaptNeigh}.}
+\item{clolist}{a boolean vector showing whether or not the neighbours were symmetrical \cr (FALSE) about the removed point during the transform. This is NULL except when \code{LocalPred=AdaptNeigh}.}
 %\item{minindexlist}{a vector indicating which configuration of neighbours was used at each step. Each component is a value between 1 and 3*\env{neighbours}. If the value is between 1 and \env{neighbours}, then value symmetrical neighbours were used. Otherwise, (value - \env{neighbours}) closest neighbours were used. This is NULL except when \code{LocalPred=AdaptNeigh}.}
 %\item{indiceslist}{a list indicating the prediction scheme (Linear, Quad, Cubic and intercept TRUE or FALSE chosen by \command{AdaptPred}) corresponding to each of the details in \env{mindetailslist}. If the value is between 1 and 3, then no intercept was used in the prediction. Larger values indicate that an intercept was used in the prediction. Values of 1 and 4 represent Linear prediction, 2 and 5 represent Quadratic prediction, 3 and 6 represent Cubic prediction. This is NULL except when \code{LocalPredmp=AdaptNeighmp}.}
 %\item{history}{a list of pairs of indices from \env{indiceslist} and \env{minindexlist}. The first number is the type of regression used, and the second indicates the neighbour configuration which results in the minimum detail coefficient.}
@@ -84,7 +83,7 @@ data(motorcycledata)
 times<-motorcycledata$time
 accel<-motorcycledata$accel
 
-out<-fwtnpmp(times,accel,LocalPredmp=AdaptPredmp,neighbours=2)
+out<-fwtnpmp(times,accel,LocalPred=AdaptPredmp,neighbours=2)
 out$coeff
 
 #these are the detail coefficients of the transform.

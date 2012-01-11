@@ -1,12 +1,8 @@
-"denoisehetero" <-function(x,f,pred=LinearPred,neigh=1,int=TRUE,clo=FALSE,keep=2,rule="median"){
+"denoisehetero" <-function(x,f,pred=LinearPred,neigh=1,int=TRUE,clo=FALSE,keep=2,rule="median",returnall=FALSE){
 
-nonorcoeff<-list()
-nordetlist<-list()
-nordetlist1<-list()
-nordetlist2<-list()
-nortclist<-list()
-nortclist1<-list()
-nortclist2<-list()
+nonorcoeff<-NULL
+nordetlist<-NULL
+nortclist<-NULL
 al<-list()
 temp<-list()
 sdvec<-NULL
@@ -20,10 +16,8 @@ fhat1<-list()
 fhat2<-list()
 
 n<-length(x)
-temp<-transmatdual(x,f,pred,neigh,int,clo,keep)
-w<-temp$Wnew
-out<-temp$out
-x<-temp$x
+
+out<-fwtnp(x,f,LocalPred=pred,neighbours=neigh,intercept=int,closest=clo,nkeep=keep,do.W=FALSE,varonly=FALSE)
 
 po<-out$pointsin
 nonorcoeff<-out$coeff
@@ -45,39 +39,27 @@ sdvec1<-h$varvec1
 sdvec2<-h$varvec2
 
 sd<-sd1<-sd2<-NULL
-m<-min(po)
-M<-max(po)
 
-#i<m:
-sd[1:(m-1)]<-sdvec[1:(m-1)]
-sd1[1:(m-1)]<-sdvec1[1:(m-1)]
-sd2[1:(m-1)]<-sdvec2[1:(m-1)]
+sd[setdiff(1:n,po)]<-sdvec
+sd1[setdiff(1:n,po)]<-sdvec1
+sd2[setdiff(1:n,po)]<-sdvec2
 
-#i=m, i=M:
-sd[c(m,M)]<-sd1[c(m,M)]<-sd2[c(m,M)]<-NA
-
-#i>m & i<M:
-sd[(m+1):(M-1)]<-sdvec[m:(M-2)]
-sd1[(m+1):(M-1)]<-sdvec1[m:(M-2)]
-sd2[(m+1):(M-1)]<-sdvec2[m:(M-2)]
-
-#i>M:
-sd[(M+1):n]<-sdvec[(M-1):(n-2)]
-sd1[(M+1):n]<-sdvec1[(M-1):(n-2)]
-sd2[(M+1):n]<-sdvec2[(M-1):(n-2)]
+sd[po]<-NA
+sd1[po]<-NA
+sd2[po]<-NA
 
 for (i in 1:levno){
-	nordetlist[[i]]<-nonorcoeff[al[[i]]]/(sd[al[[i]]])
-	nordetlist1[[i]]<-nonorcoeff[al[[i]]]/(sd1[al[[i]]])
-	nordetlist2[[i]]<-nonorcoeff[al[[i]]]/(sd2[al[[i]]])
+	nordetlist<-nonorcoeff[al[[i]]]/(sd[al[[i]]])
+	nortclist<-ebayesthresh(nordetlist,prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	newcoeff[al[[i]]]<-nortclist*(sd[al[[i]]])
 
-	nortclist[[i]]<-ebayesthresh(nordetlist[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
-	nortclist1[[i]]<-ebayesthresh(nordetlist1[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
-	nortclist2[[i]]<-ebayesthresh(nordetlist2[[i]],prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	nordetlist<-nonorcoeff[al[[i]]]/(sd1[al[[i]]])
+	nortclist<-ebayesthresh(nordetlist,prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	newcoeff1[al[[i]]]<-nortclist*(sd1[al[[i]]])
 
-	newcoeff[al[[i]]]<-nortclist[[i]]*(sd[al[[i]]])
-	newcoeff1[al[[i]]]<-nortclist1[[i]]*(sd1[al[[i]]])
-	newcoeff2[al[[i]]]<-nortclist2[[i]]*(sd2[al[[i]]])
+	nordetlist<-nonorcoeff[al[[i]]]/(sd2[al[[i]]])
+	nortclist<-ebayesthresh(nordetlist,prior="cauchy",a=NA,sdev=1,threshrule=rule)
+	newcoeff2[al[[i]]]<-nortclist*(sd2[al[[i]]])
 }
 
 newcoeff[po]<-out$coeff[po]
@@ -88,5 +70,11 @@ fhat<-invtnp(x,newcoeff,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$in
 fhat1<-invtnp(x,newcoeff1,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$interhist,n-keep,int,neigh,clo,pred)
 fhat2<-invtnp(x,newcoeff2,out$lengths,lr,po,rem,out$neighbrs,out$schemehist,out$interhist,n-keep,int,neigh,clo,pred)
 
-return(list(out=out,w=w,al=al,sd=sd,fhat=fhat,fhat1=fhat1,fhat2=fhat2))
+if(returnall){
+	return(list(fhat=fhat,fhat1=fhat1,fhat2=fhat2,w=out$W,al=al,sd=sd))
+}
+else{
+	return(fhat$coeff)
+}
+
 }

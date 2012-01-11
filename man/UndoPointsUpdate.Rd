@@ -52,7 +52,7 @@ lengths<-lengthintervals(x,I,neighbours=2,closest=FALSE)
 p<-AdaptNeigh(order(x),x,y,32,5,TRUE,2)
 #
 #
-u<-PointsUpdate(x,p$results[[6]],p$newinfo[[3]],p$newinfo[[4]],5,order(x),p$results[[4]],
+u<-PointsUpdate(x,p$results[[6]],p$newinfo[[2]],p$newinfo[[3]],5,order(x),p$results[[4]],
 lengths)
 #
 p2<-setdiff(order(x),5)
@@ -63,8 +63,7 @@ l2<-lengths[setdiff(1:100, a)]
 #
 #now undo the update step...
 #
-undo<-UndoPointsUpdate(x,u$coeff,p$newinfo[[3]],p$newinfo[[4]],5,a,99,p2,p$results[[4]],l2,
-lengths[a])
+undo<-UndoPointsUpdate(x,u$coeff,p$newinfo[[2]],p$newinfo[[3]],5,a,99,p2,p$results[[4]],l2,lengths[a])
 #
 
 }

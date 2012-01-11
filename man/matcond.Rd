@@ -24,12 +24,12 @@ matcond(x, f, Pred, neigh, int, clo, keep)
 \value{
   \item{cno}{the condition numbers for the augmented transform matrices, calculated using the Frobenius norm (see condno).}
   \item{v}{the condition numbers for the augmented transform matrices, calculated using the ratio between the largest to the smallest singular values in the singular value decomposition of the augmented matrices.}
-  \item{a}{the transform matrix information for the transform (output from transmatdual).} 
+  \item{a}{the transform matrix information for the transform (output from fwtnp).} 
 }
 
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
 
-\seealso{\code{\link{condno}}, \code{\link{transmatdual}}     }
+\seealso{\code{\link{condno}}, \code{\link{fwtnp}}     }
 \examples{
 x1<-runif(256)
 y1<-make.signal2("doppler",x=x1)

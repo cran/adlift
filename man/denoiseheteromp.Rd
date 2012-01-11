@@ -6,7 +6,8 @@
 Denoises the multiple observation inputted signal using artificial levels noise variance estimation and bayesian thresholding, using heteroscedastic (estimated) noise variances.  
 }
 \usage{
-denoiseheteromp(x, f, pred, neigh, int, clo, keep, rule = "median", mpdet="ave")
+denoiseheteromp(x, f, pred, neigh, int, clo, keep, 
+rule = "median", mpdet="ave",returnall=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,20 +18,22 @@ denoiseheteromp(x, f, pred, neigh, int, clo, keep, rule = "median", mpdet="ave")
   \item{int}{Indicates whether or not the regression curve includes an intercept.}
   \item{clo}{Refers to the configuration of the chosen neighbours. If \env{clo} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
   \item{keep}{The number of scaling coefficients to be kept in the final representation of the initial signal. This must be at least two.}
-  \item{rule}{The type of bayesian thresholding used in the procedure. Possible values are \env{"mean"}, \env{"median"} (posterior mean or median thresholding) or "hard or "soft" (hard or soft thresholding). }
+  \item{rule}{The type of bayesian thresholding used in the procedure. Possible values are \env{"mean"}, \env{"median"} (posterior mean or median thresholding) or "hard or \cr "soft" (hard or soft thresholding). }
   \item{mpdet}{how the mutiple point detail coefficients are computed.  Possible values are "ave", in which the multiple detail coefficients produced when performing the multiple predictions are averaged, or "min", where the overall minimum detail coefficient is taken.}
+  \item{returnall}{Indicates whether the function returns useful variables or just the denoised datapoints.}
 }
 \details{
 The function uses the transform matrix to normalise the detail coefficients produced from the forward transform, so that they can be used in the bayesian thresholding procedure EbayesThresh. The coefficients are divided into artificial levels, and the first (largest)level is used to estimate the noise variances of the coefficients, based on those coefficients falling in a sliding window around each gridpoint.  EbayesThresh is then used to threshold the coefficients. The resulting new coefficients are then unnormalised and the transform inverted to obtain an estimate of the true (unnoisy) signal.    
 }
 \value{
-  \item{out}{the output from the forward transform.}
-  \item{indsd}{the individual coefficient variances introduced by the transform.}
-  \item{al}{the artificial levels used to estimate the noise variance.}
-  \item{sd}{the standard deviation of the noise.}
+  If \env{returnall=FALSE}, the estimate of the function after denoising.  If \env{returnall=TRUE}, a list with components:\cr
+
   \item{fhat}{the estimate of the function after denoising.}
   \item{fhat1}{the estimate of the function after denoising, using the alternate variance estimate of MAD, centered at zero.}
   \item{fhat2}{the estimate of the function after denoising, using the alternate variance estimate of the median of the absolute values of the detail coefficients.}
+  \item{indsd}{the individual coefficient variances introduced by the transform.}
+  \item{al}{the artificial levels used to estimate the noise variance.}
+  \item{sd}{the standard deviation of the noise.}
 }
 
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
@@ -44,7 +47,8 @@ accel<-motorcycledata$accel
 
 
 
-est1<-denoiseheteromp(times,accel,AdaptNeighmp,1,TRUE,TRUE,2,"median","ave")
+est1<-denoiseheteromp(times,accel,AdaptNeighmp,1,TRUE,TRUE,2,
+"median","ave")
 #
 #the estimate of the underlying curve. 
 

@@ -6,14 +6,14 @@
 This function plots all mother and father wavelets associated with a given wavelet transform.   
 }
 \usage{
-basisfns(x, f, pred, neigh, int, clo, keep, plot.f = FALSE, plot.bas = FALSE,
- separate = FALSE)
+basisfns(x, f, pred, neigh, int, clo, keep, plot.f = FALSE, 
+plot.bas = FALSE, separate = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a gridpoint vector.}
   \item{f}{the vector of associated function values.}
-  \item{pred}{The type of regression to be performed. Possible options are \env{\link{LinearPred}}, \env{\link{QuadPred}}, \env{\link{CubicPred}}, \env{\link{AdaptPred}} and \env{\link{AdaptNeigh}}.}
+  \item{pred}{The type of regression to be performed. Possible options are \link{LinearPred}, \link{QuadPred}, \link{CubicPred}, \link{AdaptPred} and \link{AdaptNeigh}.}
   \item{neigh}{The number of neighbours over which the regression is performed at each step. If \env{closest} is false, then this in fact denotes the number of neighbours on each side of the removed point.}
   \item{int}{Indicates whether or not the regression curve includes an intercept.}
   \item{clo}{Refers to the configuration of the chosen neighbours. If \env{closest} is false, the neighbours will be chosen symmetrically around the removed point. Otherwise, the closest neighbours will be chosen.}
@@ -39,7 +39,7 @@ $\item{pointsin}{the vector of indices of points still to be removed.}
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
 \note{If \env{plot.bas=T}, since the function produces one graph for each gridpoint, R or Splus is likely to exceed the total number of open devices for large datasets.}
 
-\seealso{\code{\link{fwtnp}},\code{\link{transmatdual}}     }
+\seealso{\code{\link{fwtnp}},\code{\link{fwtnp}}     }
 \examples{
 #create test signal data
 #

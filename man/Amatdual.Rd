@@ -29,16 +29,22 @@ Amatdual(steps, pointsin, removelist, nbrs, weights, alpha)
  }
 
 \author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
-\seealso{\code{\link{transmatdual}}     }
+\seealso{\code{\link{transmatdual}}, \code{\link{fwtnp}}    }
+
+\note{ This function has been left in the package for completeness.  However, the transform matrix is (optionally) computed within the forward lifting
+transform function \code{\link{fwtnp}}.
+}
+
 \examples{
 #
 x<-runif(256)
 y<-make.signal2("doppler",x=x)
 a<-fwtnp(x,y,LocalPred=AdaptNeigh,neighbours=2)
 #
-A<-Amatdual(90,a$pointsin,a$removelist,a$neighbrs[[90]],a$gamlist[[90]],a$alphalist[[90]])
+Adual<-Amatdual(90,a$pointsin,a$removelist,a$neighbrs[[90]],
+a$gamlist[[90]],a$alphalist[[90]])
 #
-A$Adual
+Adual
 #
 #the 90th refinement matrix for the transform above.
 #

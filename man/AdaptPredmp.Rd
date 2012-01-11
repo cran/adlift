@@ -6,8 +6,8 @@
 This function performs the prediction lifting step over intercept and regression order, for multiple point data.
 }
 \usage{
-AdaptPredmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, intercept,
- neighbours, mpdet, g)
+AdaptPredmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, 
+intercept, neighbours, mpdet, g)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,9 +28,9 @@ AdaptPredmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, intercept,
 The procedure performs adaptive regression (through AdaptPred) over the three types of regression and also over intercept.  The combination (type of regression, intercept) is chosen which gives the smallest detail coefficient (in absolute value).
 }
 \value{
-\item{results.}{\emph{This is a ten item list giving the regression information chosen from the detail coefficient minimisation:}} 
+  \strong{results.}This is a ten item list giving the regression information chosen from the detail coefficient minimisation:
   \item{Xneigh}{matrix of \env{X} values corresponding to the neighbours of the removed point. The matrix consists of columns \eqn{1,X[newnbrs],X[newnbrs]^2,...} depending on the order of the prediction used and whether or not an intercept is used. Refer to any reference on linear regression for more details. }
-  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T} . }
+  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \cr \eqn{(Xneigh^T Xneigh)^{-1} Xneigh^T} . }
   \item{bhat}{The regression coefficients used in prediction. }
   \item{weights}{the prediction weights for the neighbours. }
   \item{pred}{the predicted function value obtained from the regression. }

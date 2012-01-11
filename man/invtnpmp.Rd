@@ -8,7 +8,7 @@ Performs the inverse lifting transform on a detail and scaling coefficient vecto
 \usage{
 invtnpmp(X, coefflist, coeff, lengths, lengthsremove, pointsin, removelist,
  neighbrs, newneighbrs, schemehist, interhist, nadd = length(X) - 2,
- intercept = TRUE, neighbours = 1, closest = FALSE, LocalPredmp = LinearPredmp, mpdet)
+ intercept = TRUE, neighbours = 1, closest = FALSE, LocalPred = LinearPredmp, mpdet)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -28,7 +28,7 @@ invtnpmp(X, coefflist, coeff, lengths, lengthsremove, pointsin, removelist,
   \item{intercept}{Boolean value for whether or not an intercept is used in the prediction step of the transform.}
   \item{neighbours}{the number of neighbours in the computation of the predicted value.}
   \item{closest}{a boolean value showing whether or not the neighbours were symmetrical (FALSE) about the removed point during the transform.}
-  \item{LocalPredmp}{The type of regression to be performed. Possible options are \code{LinearPredmp}, \code{QuadPredmp}, \code{CubicPredmp}, \code{AdaptPredmp} and \code{AdaptNeighmp}.}
+  \item{LocalPred}{The type of regression to be performed. Possible options are \code{LinearPredmp}, \code{QuadPredmp}, \code{CubicPredmp}, \code{AdaptPredmp} and \code{AdaptNeighmp}.}
 \item{mpdet}{how the mutiple point detail coefficients are computed.  Possible values are "ave", in which the multiple detail coefficients produced when performing the multiple predictions are averaged, or "min", where the overall minimum detail coefficient is taken.  }
 }
 \details{
@@ -69,11 +69,11 @@ times<-motorcycledata$time
 accel<-motorcycledata$accel
 shortf<-adjustx(times,accel)$sepf
 
-out<-fwtnpmp(times,accel,LocalPredmp=CubicPredmp,neighbours=2)
+out<-fwtnpmp(times,accel,LocalPred=CubicPredmp,neighbours=2)
 
 inv<-invtnpmp(times, out$coefflist, out$coeff, out$lengths, out$lengthsremove, out$pointsin,
 out$removelist,out$neighbrs,out$newneighbrs,out$schemehist,out$interhist, neighbours = 2,
-LocalPredmp = CubicPredmp)
+LocalPred = CubicPredmp)
 
 sum(abs(shortf-inv$coeff)) 
 }

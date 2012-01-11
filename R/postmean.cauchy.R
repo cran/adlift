@@ -1,5 +1,6 @@
 "postmean.cauchy" <-
 function(x, w){
+
 #
 #  Find the posterior mean for the quasi-Cauchy prior with mixing weight w
 #   given data x, which may be a scalar or a vector.
@@ -8,7 +9,6 @@ function(x, w){
 	y<-x
         ind <- (x == 0)
 	ind1<-(abs(x)<10^(-6))&!ind
-	#ind1<-which(ind1>0)
 	x <- x[!ind]
         ex <- exp( - x^2/2)
         z <- w * (x - (2 * (1 - ex))/x)

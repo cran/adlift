@@ -78,7 +78,7 @@ newnbrs<-c(newnbrs,rep(nbrs[i],times=length(g[[nbrs[i]]])))
 }
 coefflist[[31]]<-p$results[[6]][31]
 
-u<-PointsUpdatemp(X,coefflist,p$newinfo[[3]],newnbrs,p$newinfo[[4]],31,order(X),p$results[[4]],
+u<-PointsUpdatemp(X,coefflist,p$newinfo[[2]],newnbrs,p$newinfo[[3]],31,order(X),p$results[[4]],
 lengths)
 
 p2<-setdiff(order(X),31)
@@ -89,7 +89,7 @@ l2<-lengths[setdiff(1:length(X), a)]
 #
 #now undo the update step...
 #
-undo<-UndoPointsUpdatemp(X,coeff,newnbrs,p$newinfo[[3]],p$newinfo[[4]],31,a,length(X)-1,p2,
+undo<-UndoPointsUpdatemp(X,coeff,newnbrs,p$newinfo[[2]],p$newinfo[[3]],31,a,length(X)-1,p2,
 p$results[[4]],l2,lengths[a])
 #
 

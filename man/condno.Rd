@@ -30,11 +30,11 @@ condno(W, type)
 x<-runif(100)
 y<-make.signal2("blocks",x=x)
 #
-a<-transmatdual(x,y,Pred=AdaptNeigh,neigh=2)
+a<-fwtnp(x,y,LocalPred=AdaptNeigh,neigh=2,do.W=TRUE,varonly=FALSE)
 #
 #computes the transition matrix for the specified options
 #
-W<-a$Wnew
+W<-a$W
 #
 condno(W,"F")
 #

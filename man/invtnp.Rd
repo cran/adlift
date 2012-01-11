@@ -7,9 +7,9 @@
 Performs the inverse lifting transform on a detail and scaling coefficient vector with grid \env{X} and corresponding coefficients \env{coeff}. There is a unique correspondence between the grid values and the function values.
 }
 \usage{
-invtnp(X, coeff, lengths, lengthsremove, pointsin, removelist, neighbrs, schemehist,
- interhist, nadd = length(X) - 2, intercept = TRUE, neighbours = 1, closest = FALSE,
- LocalPred = LinearPred)
+invtnp(X, coeff, lengths, lengthsremove, pointsin, removelist, 
+neighbrs, schemehist, interhist, nadd = length(X) - 2, 
+intercept = TRUE, neighbours = 1, closest = FALSE, LocalPred = LinearPred)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -6,8 +6,8 @@
 This function performs the prediction lifting step over neighbourhoods and interpolation schemes, for multiple point data.
 }
 \usage{
-AdaptNeighmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, intercept,
- neighbours, mpdet, g)
+AdaptNeighmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, 
+remove, intercept, neighbours, mpdet, g)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,9 +27,9 @@ AdaptNeighmp(pointsin, X, coefflist, coeff, nbrs, newnbrs, remove, intercept,
 The procedure performs adaptive regression (through \command{AdaptPred}) over the three types of regression and also over the 3*\env{neighbours} configurations of neighbours. The combination (type of regression, configuration of neighbours) is chosen which gives the smallest detail coefficient (in absolute value). 
 }
 \value{
-  \item{results.}{\emph{This is a ten item list giving the regression information chosen from the detail coefficient minimisation (i.e, the information supplied to \command{AdaptNeigh} by \command{AdaptPred}):}} 
+  \strong{results.}  This is a ten item list giving the regression information chosen from the detail coefficient minimisation (i.e, the information supplied to \command{AdaptNeigh} by \command{AdaptPred}): 
   \item{Xneigh}{matrix of \env{X} values corresponding to the neighbours of the removed point. The matrix consists of columns \eqn{1,X[nbrs],X[nbrs]^2,...} depending on the order of the prediction used and whether or not an intercept is used. Refer to any reference on linear regression for more details. }
-  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \eqn{({Xneigh}^T Xneigh)^{-1} {Xneigh}^T} . }
+  \item{mm}{the matrix from which the prediction is made. In terms of \env{Xneigh}, it is \cr \eqn{({Xneigh}^T Xneigh)^{-1} {Xneigh}^T} . }
   \item{bhat}{The regression coefficients used in prediction. }
   \item{weights}{the prediction weights for the neighbours. }
   \item{pred}{the predicted function value obtained from the regression. }
@@ -45,7 +45,7 @@ The procedure performs adaptive regression (through \command{AdaptPred}) over th
 \item{nbrs}{the indices into \env{X} of the neighbours used in the best prediction scheme.}
 \item{index}{the indices into \env{pointsin} of the neighbours used in the best prediction. }
 \item{mindetails}{a vector of 3*\env{neighbours} entries giving the minimum details produced by each call of \command{AdaptPred} in \command{AdaptNeigh} (for the different number and configuration of neighbours). }
-\item{minindices}{vector of 3*\env{neighbours} entries giving the index (out of 6) of the schemes which produce the best predictions by each call of \command{AdaptPred} in \command{AdaptNeigh}.}
+\item{minindices}{vector of 3*\env{neighbours} entries giving the index (out of 6) of the schemes which produce the best predictions by each call of \cr \command{AdaptPred} in \command{AdaptNeigh}.}
 }
 
 %\note{The \pkg{Matrix} package is needed for this function.} 
