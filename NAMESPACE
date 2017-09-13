@@ -2,7 +2,22 @@
 # Remove the previous line if you edit this file
 
 # Export all names
-exportPattern(".")
+# exportPattern(".")
+export(AdaptNeigh, AdaptNeighmp, AdaptPred,AdaptPredmp, LinearPred,LinearPredmp,QuadPred,QuadPredmp,CubicPred,CubicPredmp)  
+export(denoise,denoise2,denoisehetero, denoisehetero2,denoiseheteromp,denoiseheteroprop,denoiseheteroprop2)
+export(adjustx,dojitter,modjitter,intervals,lengthintervals,matcond,condno,basisfns,Rmatsolve,as.row,as.column,findadds)
+export(fwtnp,fwtnp2,invtnp,invtnp2,fwtnpmp,invtnpmp)
+export(make.signal2,postmean.cauchy)
+export(Amatdual,Amatdual2,transmatdual,transmatdual2)
+export(PointsUpdate,PointsUpdate2,UndoPointsUpdate,UndoPointsUpdatemp,PointsUpdatemp)
+export(getnbrs,heterovar,artlev)
 
+    
 # Import all packages listed as Imports or Depends
-useDynLib(adlift)
+useDynLib(adlift, .registration=TRUE, .fixes="C_")
+
+importFrom("grDevices", "dev.cur", "dev.set")
+importFrom("graphics", "legend", "lines", "plot")
+importFrom("stats", "dnorm", "mad", "median", "quantile", "rnorm","runif", "var")
+
+import(EbayesThresh)

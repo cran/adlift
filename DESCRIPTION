@@ -1,12 +1,14 @@
 Package: adlift
-Version: 1.3-2
-Date: 01/11/2012
-Title: An adaptive lifting scheme algorithm
-Author: Matt Nunes <m.nunes@lancs.ac.uk> Marina Knight
-Maintainer: Matt Nunes <m.nunes@lancs.ac.uk>
-Description: Adaptive Wavelet transforms for signal denoising
+Version: 1.3-3
+Date: 2017-09-13
+Title: An Adaptive Lifting Scheme Algorithm
+Author: Matt Nunes [aut, cre], Marina Knight [aut], Guy Nason [ctb, ths] 
+Authors@R: c(person("Matt","Nunes", role=c("aut","cre"),email="m.nunes@lancaster.ac.uk"), person("Marina","Knight", role="aut"), person("Guy","Nason",role=c("ctb","ths")))
+Maintainer: Matt Nunes <m.nunes@lancaster.ac.uk>
+Description: Adaptive wavelet lifting transforms for signal denoising using optimal local neighbourhood regression, from Nunes et al. (2006) <doi:10.1007/s11222-006-6560-y>.
 Depends: EbayesThresh
 License: GPL
-Packaged: 2012-11-06 11:17:16 UTC; nunes
+Packaged: 2017-09-13 10:39:01 UTC; nunes
 Repository: CRAN
-Date/Publication: 2012-11-06 11:46:06
+Date/Publication: 2017-09-13 17:33:48 UTC
+NeedsCompilation: yes

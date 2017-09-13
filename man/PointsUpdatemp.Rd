@@ -85,7 +85,8 @@ newnbrs
 
 coefflist[[31]]<-p$results[[6]][31]
 
-u<-PointsUpdatemp(X,coefflist,p$newinfo[[2]],newnbrs,p$newinfo[[3]],31,order(X),p$results[[4]],lengths)
+u<-PointsUpdatemp(X,coefflist,p$newinfo[[2]],newnbrs,p$newinfo[[3]],31,
+order(X),p$results[[4]],lengths)
 #
 #and here is the updated coefficient list...
 u$coeff

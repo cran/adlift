@@ -34,8 +34,7 @@ if ((n - nkeep) > 0) {
             as.integer(n), coeff = as.double(coeff), lr = as.double(lengthsremove), 
             lengths = as.double(coeff), lca = as.double(t(lca)), 
             po = as.integer(pointsin), nc = as.integer(0), as.integer(do.W), 
-            W = as.double(t(W)), as.integer(varonly), v = as.double(v), 
-            PACKAGE = "adlift")
+            W = as.double(t(W)), as.integer(varonly), v = as.double(v))
 
         ans$po <- ans$po[1:nkeep]
         ans$lengths <- ans$lengths[1:nkeep]

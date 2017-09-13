@@ -89,8 +89,8 @@ l2<-lengths[setdiff(1:length(X), a)]
 #
 #now undo the update step...
 #
-undo<-UndoPointsUpdatemp(X,coeff,newnbrs,p$newinfo[[2]],p$newinfo[[3]],31,a,length(X)-1,p2,
-p$results[[4]],l2,lengths[a])
+undo<-UndoPointsUpdatemp(X,coeff,newnbrs,p$newinfo[[2]],p$newinfo[[3]],31,
+a,length(X)-1,p2,p$results[[4]],l2,lengths[a])
 #
 
 }

@@ -63,7 +63,8 @@ l2<-lengths[setdiff(1:100, a)]
 #
 #now undo the update step...
 #
-undo<-UndoPointsUpdate(x,u$coeff,p$newinfo[[2]],p$newinfo[[3]],5,a,99,p2,p$results[[4]],l2,lengths[a])
+undo<-UndoPointsUpdate(x,u$coeff,p$newinfo[[2]],p$newinfo[[3]],5,a,99,p2,
+p$results[[4]],l2,lengths[a])
 #
 
 }

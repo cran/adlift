@@ -22,7 +22,7 @@ if(nadd>0){
 		lengthsremove=as.double(lengthsremove),as.integer(pointsin),
 		as.double(t(lca)),as.integer(nadd),as.integer(N),as.integer(lr),
 		as.integer(nc),outpo=as.integer(rep(0,times=N+nadd)),
-		outlen=as.double(rep(0,times=N+nadd)),PACKAGE="adlift")
+		outlen=as.double(rep(0,times=N+nadd)))
 
 	coeff<-ans$coeff
 	lengths<-ans$outlen

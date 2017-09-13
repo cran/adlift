@@ -13,7 +13,7 @@ if (length(nbrs) == 1) {
 ans <- .C("pointsupdate", as.double(X), c = as.double(coeff), 
        	as.integer(length(nbrs)), as.integer(index), as.integer(remove), 
        	as.integer(pointsin), w = as.double(weights), l = as.double(lengths), 
-       	N = as.integer(N), a = as.double(alpha), r = as.integer(0), PACKAGE = "adlift")
+       	N = as.integer(N), a = as.double(alpha), r = as.integer(0))
 
 return(list(coeff = ans$c, lengths = ans$l, r = ans$r, N = ans$N, weights = ans$w, alpha = ans$a))
 }
