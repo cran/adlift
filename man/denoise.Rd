@@ -35,7 +35,7 @@ The function uses the transform matrix to normalise the detail coefficients prod
   \item{sd}{the standard deviation of the noise.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{denoisehetero}}   }
 \examples{

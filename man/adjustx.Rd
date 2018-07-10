@@ -23,7 +23,7 @@ The function compares \env{x} to \command{unique(x)} to find the occurences of r
 \item{groups}{a list of indices into \env{x} showing where the original repeated grid values occured.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 
 \seealso{ \code{\link{fwtnp}},     }

@@ -33,7 +33,7 @@ The procedure performs a minimum norm update lifting step. Firstly the interval 
 
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}, \code{\link{UndoPointsUpdate}}      }
 \examples{

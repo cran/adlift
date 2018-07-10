@@ -28,7 +28,7 @@ The function works out the interval endpoints for each gridpoint in \env{removel
 \item{varvec2}{a vector of median absolute deviation values (from the median), centered at zero, for the coefficients in \env{dlist}.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{denoisehetero}}     }
 

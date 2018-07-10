@@ -21,7 +21,7 @@ condno(W, type)
   \item{condno}{the condition number of the matrix \env{W}. }
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 \note{The matrix \env{W} must be invertible.}
 
 \examples{

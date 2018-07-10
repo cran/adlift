@@ -72,7 +72,7 @@ The algorithm continues until as many points as desired are removed.
 \item{mp}{a boolean vector of which of the groups are actually multiple points.}
 } 
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina.Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina.Knight}
 
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{fwtnp}}, \code{\link{invtnpmp}}, \code{\link{LinearPredmp}}, \code{\link{QuadPredmp}}     }
 

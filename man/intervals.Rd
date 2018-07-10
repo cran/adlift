@@ -22,7 +22,7 @@ The function constructs the intervals by sorting the observed gridpoints. The en
 \item{order}{\code{order(X)} (the sorted observation order).}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{lengthintervals}}     }
 \examples{

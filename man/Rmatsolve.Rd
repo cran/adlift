@@ -20,7 +20,7 @@ This function uses the eigenvalue decomposition of a matrix \env{m} to work out 
 \item{inv}{the matrix inverse of \env{m}.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 \examples{
 #

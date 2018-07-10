@@ -40,7 +40,7 @@ transform function \code{\link{fwtnp}}.
 \seealso{\code{\link{fwtnp}}, \code{\link{Amatdual}}     }
 
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \examples{
 x1<-runif(10)

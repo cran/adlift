@@ -33,7 +33,7 @@ UndoPointsUpdate(X, coeff, nbrs, index, remove, r, N, pointsin, gamweights,
   \item{alpha}{the weights used to modify \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{invtnp}}, \code{\link{LinearPred}}, \code{\link{PointsUpdate}},
  \code{\link{QuadPred}}     }
 \examples{

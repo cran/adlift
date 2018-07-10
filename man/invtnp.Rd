@@ -53,7 +53,7 @@ The algorithm continues like this until as many points as desired are added.
 \item{removelist}{a vector of indices into \env{X} of the lifted coefficients during the transform (in the reverse order of how they were added).}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{AdaptPred}}, \code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{invtnpmp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}, \code{\link{UndoPointsUpdate}}     }
 

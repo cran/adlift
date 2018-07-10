@@ -20,7 +20,7 @@ artlev(y, rem)
     \item{p}{a list of the grouped indices of \env{removelist} (in decreasing group size) indicating thresholding groups.}
   }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 \seealso{\code{\link{denoise}},     }
 \examples{

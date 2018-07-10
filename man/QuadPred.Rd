@@ -30,7 +30,7 @@ The procedure performs quadratic regression using the given neighbours using an 
 \item{coeff}{vector of (modified) detail and scaling coefficients to be used in the update step of the transform.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 %\note{The Matrix package is needed for this function.}
 
 \seealso{\code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{LinearPred}}     }

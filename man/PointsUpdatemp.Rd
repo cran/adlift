@@ -33,7 +33,7 @@ The procedure performs a minimum norm update lifting step. Firstly the interval 
   \item{alpha}{the update weights used to update \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{fwtnpmp}}, \code{\link{LinearPredmp}},
  \code{\link{QuadPredmp}}, \code{\link{UndoPointsUpdatemp}}      }

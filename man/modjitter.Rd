@@ -20,7 +20,7 @@ modjitter(x, amount)
   \item{jx}{the jittered version of \env{x}}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{dojitter}}, \code{\link{make.signal2}}    }
 \examples{

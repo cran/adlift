@@ -27,7 +27,7 @@ getnbrs(X, remove, pointsin, neighbours, closest)
 \item{index}{the indices into \env{pointsin} of the neighbours}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{fwtnp}}     }
 

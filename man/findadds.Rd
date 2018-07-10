@@ -37,7 +37,7 @@ of which is
 the number of inversion steps needed for that datapoint to be fully 
 reconstructed.}
 \author{
-Matt Nunes (\email{m.nunes@lancs.ac.uk})
+Matt Nunes (\email{nunesrpackages@gmail.com})
 }
 %\note{
 %%  ~~further notes~~

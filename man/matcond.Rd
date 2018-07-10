@@ -27,7 +27,7 @@ matcond(x, f, Pred, neigh, int, clo, keep)
   \item{a}{the transform matrix information for the transform (output from fwtnp).} 
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{condno}}, \code{\link{fwtnp}}     }
 \examples{

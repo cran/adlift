@@ -36,7 +36,7 @@ $\item{pointsin}{the vector of indices of points still to be removed.}
 %\item{interhist}{vector of boolean values indicating whether an intercept was used in the prediction steps during the transform (in the order of removal). }
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 \note{If \env{plot.bas=T}, since the function produces one graph for each gridpoint, R or Splus is likely to exceed the total number of open devices for large datasets.}
 
 \seealso{\code{\link{fwtnp}},\code{\link{fwtnp}}     }

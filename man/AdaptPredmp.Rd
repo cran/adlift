@@ -42,7 +42,7 @@ The procedure performs adaptive regression (through AdaptPred) over the three ty
 }
 
 %\note{The \pkg{Matrix} package is needed for this function.}
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{CubicPredmp}}, \code{\link{fwtnpmp}}, \code{\link{LinearPredmp}}, \code{\link{QuadPredmp}}    }

@@ -28,7 +28,7 @@ Amatdual(steps, pointsin, removelist, nbrs, weights, alpha)
 \item{weights}{the prediction weights obtained from the regression in the prediction step of the transform.}
  }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 \seealso{\code{\link{transmatdual}}, \code{\link{fwtnp}}    }
 
 \note{ This function has been left in the package for completeness.  However, the transform matrix is (optionally) computed within the forward lifting

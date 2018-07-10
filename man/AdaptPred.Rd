@@ -36,7 +36,7 @@ neighbours)
 }
 
 %\note{The \pkg{Matrix} package is needed for this function.}
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight}
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight}
 
 
 \seealso{\code{\link{AdaptNeigh}}, \code{\link{CubicPred}}, \code{\link{fwtnp}}, \code{\link{LinearPred}}, \code{\link{QuadPred}}    }

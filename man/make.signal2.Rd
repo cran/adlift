@@ -23,7 +23,7 @@ make.signal2(name, x, snr = Inf, ...)
   \item{z}{the signal function values.}
 }
 \note{The test signals have domain [0,1], so the grid vector \env{x} must have values within this interval.}
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \examples{
 #create grid vector

@@ -33,7 +33,7 @@ UndoPointsUpdatemp(X, coeff, nbrs, newnbrs, index, remove, r, N, pointsin,
   \item{alpha}{the weights used to modify \env{lengths} and \env{coeff}.}
 }
 
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 \seealso{\code{\link{AdaptNeighmp}}, \code{\link{AdaptPredmp}}, \code{\link{CubicPredmp}}, \code{\link{invtnpmp}}, \code{\link{LinearPredmp}}, \code{\link{PointsUpdatemp}}, \code{\link{QuadPredmp}}     }
 \examples{
 #read in data with multiple values...

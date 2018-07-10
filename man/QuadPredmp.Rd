@@ -36,7 +36,7 @@ The procedure performs quadratic regression using the given neighbours using an 
 }
 
 %\note{The \pkg{Matrix} is needed for this function.}
-\author{Matt Nunes (\email{m.nunes@lancs.ac.uk}), Marina Knight }
+\author{Matt Nunes (\email{nunesrpackages@gmail.com}), Marina Knight }
 
 \seealso{\code{\link{CubicPredmp}}, \code{\link{fwtnpmp}}, \code{\link{LinearPredmp}}     }
 
