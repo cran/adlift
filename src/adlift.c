@@ -1,3 +1,17 @@
+
+/* addition for future-proofing with R >= 4.2 see Brian Ripley email 25/09/21 */
+/* taken from R extensions manual 6.6.1 */
+/* must be before any R headers etc */
+
+#define USE_FC_LEN_T
+#include <Rconfig.h>
+#include <R_ext/Lapack.h>
+#ifndef FCONE
+# define FCONE
+#endif
+
+/* **** end of addition **** */
+
 #include <R.h> 
 #include <math.h>
 #include <stdio.h>
@@ -1081,7 +1095,7 @@ double one = 1.0 , zero = 0.0, *tmp=malloc(*nrx**ncy*sizeof(double));
 void myt();
 
 F77_CALL(dgemm)(transa,transb,nrx,ncy,ncx,&one,
-    x,ncx,y,ncy,&zero,tmp,nrx);
+    x,ncx,y,ncy,&zero,tmp,nrx FCONE FCONE);
 
 
 myt(tmp,ncy,nrx,ans);  /* output from call is bycol, i.e. need to swap dimensions */
@@ -1452,7 +1466,7 @@ rz=malloc(*n**n*sizeof(double));
 F77_CALL(dsyevr)(jobv, range, uplo, n, a, n,
              &vl, &vu, &il, &iu, &abstol, &m, rv,
              rz, n, isuppz,
-             &tmp, &lwork, &itmp, &liwork, &info);
+             &tmp, &lwork, &itmp, &liwork, &info FCONE FCONE FCONE);
 
 lwork = (int) tmp;
 liwork = itmp;
@@ -1463,7 +1477,7 @@ iwork = malloc(liwork*sizeof(int));
 F77_CALL(dsyevr)(jobv, range, uplo, n, a, n,
              &vl, &vu, &il, &iu, &abstol, &m, rv,
              rz, n, isuppz,
-             work, &lwork, iwork, &liwork, &info);
+             work, &lwork, iwork, &liwork, &info FCONE FCONE FCONE);
 
 work=realloc(work,*n**n*sizeof(double));
 myt(rz,n,n,work);

@@ -1,4 +1,4 @@
-8a6169dab7ba32c33cae43480b11cfb5 *DESCRIPTION
+5ff92f294d807a81c6e58c979d63357c *DESCRIPTION
 933ff27ba3ee992aad1a14088011f14e *NAMESPACE
 e6009c987640dae5ae7e3c4ad9888102 *R/AdaptNeigh.R
 5db130a01bc7be9e5f85c217f9f25cae *R/AdaptNeighmp.R
@@ -51,8 +51,8 @@ ee3fb1ae75992d0f30e00a7ed3e8f5d3 *R/matcond.R
 9e2864fad3f84dd5b142b07afa095a1e *R/transmatdual2.R
 5e7075b5ffb711f7884274fa5568fe6e *R/zzz.R
 84682c6931026ecf73c08109ec33df4f *data/motorcycledata.txt.gz
-845d2bc6f4c821d8774ae1a62f81bdec *man/AdaptNeigh.Rd
-336fc0dd596786b4e03d14be3165b0dc *man/AdaptNeighmp.Rd
+e719ef6c7ecf02379cd973f84fb46958 *man/AdaptNeigh.Rd
+b0631a273b0a4c670e1cd7c34c0f105c *man/AdaptNeighmp.Rd
 93c0606aaa6e31e3dcce84fecb5fb8de *man/AdaptPred.Rd
 30394e6a7d50e205b0789c262efa6fe0 *man/AdaptPredmp.Rd
 2a639c20fd8e3c3b80527315be949fa0 *man/Amatdual.Rd
@@ -91,8 +91,8 @@ e875c124bb8b9f692652c962687009ba *man/lengthintervals.Rd
 13f96e883bfb399ecb83e7e196c0672b *man/matcond.Rd
 fb972f11579a028a3967b2d8679384c2 *man/modjitter.Rd
 b3bba635fe3446b3dccb138f8542381d *man/motorcycledata.Rd
-c280a2563b316a804bd142f39d3e9864 *man/postmean.cauchy.Rd
+3e494afcf5968fec5de74eea755867b8 *man/postmean.cauchy.Rd
 19331d222ce24782710fea9419d78aef *man/transmatdual.Rd
 3996e7c16bfb96fad295ee425815cb4d *src/Makevars
-338f33794429ae36d9e646276631ca04 *src/adlift.c
+705edfdf94ffdd7d683025e6e64df32b *src/adlift.c
 48331d5eaca42b307aa2e8063297a7b0 *src/init.c

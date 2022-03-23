@@ -38,7 +38,7 @@ The procedure performs adaptive regression (through \command{AdaptPred}) over th
   \item{scheme}{a character vector denoting the type of regression used in the prediction ("Linear", "Quad" or "Cubic"). }
   \item{details}{a vector of the detail coefficients from which \command{AdaptPred} selects the minimum value. There are six entries. The first three entries represent the detail coefficients from regression with no intercept in increasing order of prediction. The second three details are values for regression with intercept. }
 \item{minindex}{the index into details (\env{results[[9]]}) which produces the minimum value.}
-\item{}{}
+
 \strong{newinfo.} A six item list containing extra information to be used in the main transform procedure (\command{fwtnp}) obtained from the minimisation in \command{AdaptNeigh}: 
 \item{clo}{boolean value telling the configuration of the neighbours which produce the overall minimum detail coefficient. }
 \item{totalminindex}{the index into \env{mindetails} (below) indicating the overall minimum detail coefficient produced by the procedure. }

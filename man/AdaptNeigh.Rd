@@ -1,13 +1,12 @@
 \name{AdaptNeigh}
 \alias{AdaptNeigh}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{AdaptNeigh}
 \description{This function performs the prediction lifting step over neighbourhoods and interpolation schemes. }
 \usage{
 AdaptNeigh(pointsin, X, coeff, nbrs, remove, intercept, 
-neighbours)}
+neighbours)
+}
 
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pointsin}{The indices of gridpoints still to be removed. }
   \item{X}{the vector of grid values. }
@@ -32,7 +31,6 @@ neighbours)}
   \item{scheme}{a character vector denoting the type of regression used in the prediction ("Linear", "Quad" or "Cubic"). }
   \item{details}{a vector of the detail coefficients from which \command{AdaptPred} selects the minimum value. There are six entries. The first three entries represent the detail coefficients from regression with no intercept in increasing order of prediction. The second three details are values for regression with intercept. }
   \item{minindex}{the index into details (\env{results[[9]]}) which produces the minimum value.}
-\item{}{}
 
 \strong{newinfo.} A six item list containing extra information to be used in the main transform procedure (\command{fwtnp}) obtained from the minimisation in \command{AdaptNeigh}:
 \item{clo}{boolean value telling the configuration of the neighbours which produce the overall minimum detail coefficient. }
@@ -74,77 +72,6 @@ an[[2]][[3]]
 
 }
 \keyword{regression}% at least one, from doc/KEYWORDS
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
