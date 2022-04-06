@@ -1,4 +1,4 @@
-5ff92f294d807a81c6e58c979d63357c *DESCRIPTION
+32ee2592fc856df4ae51ddb9b9bab396 *DESCRIPTION
 933ff27ba3ee992aad1a14088011f14e *NAMESPACE
 e6009c987640dae5ae7e3c4ad9888102 *R/AdaptNeigh.R
 5db130a01bc7be9e5f85c217f9f25cae *R/AdaptNeighmp.R
@@ -94,5 +94,5 @@ b3bba635fe3446b3dccb138f8542381d *man/motorcycledata.Rd
 3e494afcf5968fec5de74eea755867b8 *man/postmean.cauchy.Rd
 19331d222ce24782710fea9419d78aef *man/transmatdual.Rd
 3996e7c16bfb96fad295ee425815cb4d *src/Makevars
-705edfdf94ffdd7d683025e6e64df32b *src/adlift.c
+ea21ee373169430e25922528a987325f *src/adlift.c
 48331d5eaca42b307aa2e8063297a7b0 *src/init.c
