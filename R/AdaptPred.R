@@ -2,7 +2,7 @@
 function(pointsin,X,coeff,nbrs,remove,intercept,neighbours){
 
 #does local adaptive prediction for the point remove based on N 
-#points (chooses method of prediction and intercept);
+#points (chooses method of prediction and intercept)
 
 details<-NULL
 results<-list()

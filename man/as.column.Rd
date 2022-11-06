@@ -32,19 +32,19 @@ as.column(vector)
 #
 #...gives output dimension of (8,1)
 #
-F<-matrix(c(6,2,2,10,6,17),3,2)
+A<-matrix(c(6,2,2,10,6,17),3,2)
 #
 #
-as.column(F)
+as.column(A)
 
 #
 #the function has no effect on F
 #
-F<-t(F)
+F<-t(A)
 F
 #now has dimension (2,3)...
 #
-as.column(F)
+as.column(A)
 #
 #the output is made to have more rows than columns
 

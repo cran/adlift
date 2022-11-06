@@ -1,7 +1,7 @@
 "AdaptNeighmp" <-function(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g){
 
 #does local adaptive prediction for the point remove based on N 
-#points (chooses method of prediction and intercept);
+#points (chooses method of prediction and intercept)
 
 mindetails<-NULL
 minindices<-NULL
@@ -13,8 +13,8 @@ clo<-NULL
 int<-NULL
 scheme<-NULL
 
-N<-length(pointsin);
-r<-which(pointsin==remove);
+N<-length(pointsin)
+r<-which(pointsin==remove)
 
 min1<-min(N-1,neighbours)
 min2<-min(N-1,2*neighbours)

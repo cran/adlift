@@ -5,7 +5,7 @@ function(X,coeff,nbrs,index,remove,pointsin,weights,lengths){
 
 r<-which(pointsin==remove)
 
-N<-length(pointsin);
+N<-length(pointsin)
 
 ###update the interval lengths (>=2 nbrs)###
 
@@ -25,7 +25,7 @@ else{
 
 ###update the scaling function coefficients###
 
-alpha<-matrix(0,1,length(nbrs));
+alpha<-matrix(0,1,length(nbrs))
 
 if (length(nbrs)>=2){
 	alpha<-lengths[r]*lengths[index]/(sum(lengths[index]^2))

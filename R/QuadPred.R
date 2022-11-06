@@ -2,14 +2,14 @@
 function(pointsin,X,coeff,nbrs,remove,intercept,neighbours){
 
 #does local quadratic (parabolic) prediction for the point remove based on N 
-#points (with intercept as default);
+#points (with intercept as default)
 
 Xneighbours<-cbind(X[nbrs],X[nbrs]^2)
 Xremove<-cbind(X[remove],X[remove]^2)
 
 if (intercept){
-	Xneighbours<-cbind(1,Xneighbours);
-	Xremove<-as.row(c(1,Xremove));
+	Xneighbours<-cbind(1,Xneighbours)
+	Xremove<-as.row(c(1,Xremove))
 }
 
 if (length(nbrs)>=3){       #possible to have parabola with intercept

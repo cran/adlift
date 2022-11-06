@@ -2,7 +2,7 @@
 function(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g){
 
 # does local linear prediction for the point remove based on N points (with 
-# intercept as default);
+# intercept as default)
 # with multiple point consideration
 
 if (length(pointsin)==2){

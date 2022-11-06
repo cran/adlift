@@ -21,13 +21,12 @@
 #include <Rinternals.h>
 #include <R_ext/Lapack.h>
 
+#include "adlift.h"
+
 /* ********** */
 
-void adaptneigh(pointsin,X,coeff,nbrs,remove,inter,nn,weights,scheme,clo,index,neighbours,N,docoeff)
+void adaptneigh(int *pointsin, double *X, double *coeff, int *nbrs, int *remove, int* inter, int *nn, double *weights, int *scheme, int *clo, int *index, int *neighbours, int *N, int *docoeff){
 
-int *pointsin,*nbrs,*remove,*neighbours,*nn,*inter,*scheme,*clo,*index,*N,*docoeff;
-double *X, *coeff,*weights;
-{
 
 	int i,tot,min1,min2,ip;
 	int minindex;
@@ -37,13 +36,6 @@ double *X, *coeff,*weights;
 	int *nbrs1;
 	int *nbrs2, *index2;
 	int one=1;
-
-
-	void adaptpred();
-	void mymind();
-	void getnbrs();
-	void mycpyi();
-	void mycpyd();
 
 	min1=((*N-1)<=*neighbours) ? (*N-1) : *neighbours ;
 	min2=((*N-1)<=(2**neighbours)) ? (*N-1) : (2**neighbours) ;
@@ -136,22 +128,11 @@ double *X, *coeff,*weights;
 
 /* ********* */
 
-void adaptpred(pointsin,X,coeff,nbrs,remove,inter,nn,weights,scheme,docoeff)
-
-int *pointsin,*nbrs,*remove,*nn,*inter,*scheme,*docoeff;
-double *X, *coeff,*weights;
-{
+void adaptpred(int *pointsin, double *X, double *coeff, int *nbrs, int *remove, int* inter, int *nn, double *weights, int* scheme, int *docoeff){
 
 	int one=1,six=6,minindex;
 	double *tmpweights,cr,min;
 	double *details;
-
-	void linearpred();
-	void quadpred();
-	void cubicpred();
-	void mycpyd();
-	void mymind();
-	void myrbind();
 
 	cr=*(coeff+*remove-1);
 
@@ -243,11 +224,7 @@ double *X, *coeff,*weights;
 
 /* ********** */
 
-void amatdual(steps,po,re,nbrs,weights,alpha,lpo,lre,nn,adual)
-
-double *weights,*alpha,*adual;
-int *steps,*po,*re,*nbrs,*lpo,*lre,*nn;
-{
+void amatdual(int *steps,int *po, int *re, int *nbrs, double *weights, double *alpha, int *lpo, int *lre, int *nn, double *adual){
 
 	int n=*lpo+*lre,lnp=n-*steps+1,l=lnp-1;
 	int i,j,k,m,r1,r2,ind,ind2,dummy;
@@ -256,13 +233,6 @@ int *steps,*po,*re,*nbrs,*lpo,*lre,*nn;
 	double *malpha=calloc(*nn,sizeof(double)),*lastcol=calloc(l,sizeof(double)),*gdual=calloc(lnp,sizeof(double));
 	double *hdual=calloc(l*lnp,sizeof(double)),*obyo=calloc(*nn**nn,sizeof(double));
 	double *tmp=calloc(l,sizeof(double)), *hdualtmp=calloc(l*l,sizeof(double));
-
-	void mmult();
-	void mycbind();
-	void mydiag();
-	void mymatchi();
-	void myrbind();
-	void myrevi();
 
 	myrevi(re,lre,revre);
 
@@ -322,13 +292,10 @@ int *steps,*po,*re,*nbrs,*lpo,*lre,*nn;
 
 /* ********** */
 
-void atimesb(a,b,n,prod,s)
+void atimesb(double *a, double *b, int *n, double *prod, double *s){
 
 /* does (pointwise) vector multiplication and i.p. */
 
-double *a, *b, *prod, *s;
-int *n;
-{
 	int i;
 	*s=0;
 
@@ -341,20 +308,14 @@ int *n;
 
 /* ********** */
 
-void aug(A,ra,ca,Aaug)
+void aug(double *A, int *ra, int *ca, double *Aaug){
 
 /* fills the top left corner of Aaug with A.  If Aaug is initialized as zeros, this will augment A with a column and row of zeros.  */
 /* input for A and Aaug are by row (in vector form). */
 
-double *A,*Aaug;
-int *ra, *ca;
-{
 	int i=1,j=*ca+1;
 	double *zeroc=calloc(*ra,sizeof(double)),*zeror=calloc(*ca+1,sizeof(double));
 	double *tmp=calloc(*ra*(*ca+1),sizeof(double));
-
-	void myrbind();
-	void mycbind();
 
 	mycbind(A,zeroc,ra,ca,&i,tmp);
 	free(zeroc);
@@ -367,11 +328,8 @@ int *ra, *ca;
 
 /* ********** */
 
-void cubicpred(pointsin,X,coeff,nbrs,remove,inter,nn,weights,docoeff)
+void cubicpred(int *pointsin, double *X, double *coeff, int *nbrs, int *remove, int *inter, int *nn, double *weights, int *docoeff){
 
-int *pointsin,*nbrs,*remove,*inter,*nn,*docoeff;
-double *X, *coeff,*weights;
-{
 	int i,one=1,two=2,three=3,nc=3,dim;
 	double *xn,*xr;
 	double *tmpxn,*txn;
@@ -379,12 +337,6 @@ double *X, *coeff,*weights;
 	double *tmpxr,*bhat;
 	double *dummy1,*dummy2,*dummy3;
 	double pred=0;
-
-	void mmult();
-	void mycbind();
-	void mycpyd();
-	void myt();
-	void rmatsolve();
 
 	tmpxr=calloc(1,sizeof(double));
 	*tmpxr=*(X+*remove-1);
@@ -527,13 +479,7 @@ double *X, *coeff,*weights;
 
 /* ********** */
 
-void fwtnp(input,f,nkeep,intercept,initboundhandl,neighbours,closest,LocalPred,n,coeff,lengthsremove,lengths,lca,pointsin,nc,doW,W,varonly,v)
-
-double *input,*f,*coeff,*lca,*lengthsremove,*lengths;
-int *nkeep,*intercept,*initboundhandl,*neighbours,*closest,*LocalPred,*n,*pointsin,*nc;  
-double *W,*v;
-int *doW, *varonly;
-{
+void fwtnp(double *input, double *f, int *nkeep, int *intercept, int *initboundhandl, int *neighbours, int *closest, int *LocalPred, int *n, double *coeff, double *lengthsremove, double *lengths, double *lca, int *pointsin, int *nc, int *doW, double *W, int *varonly, double *v){
 
 	int i,j,k=0,N=*n,nn,scheme,r,remove,nr=0,max,dim,dim1,dim2,dim2sq,dummy=*n-*nkeep, nnmax=2**neighbours,one=1, ex=0;
 	int *po;
@@ -554,25 +500,6 @@ int *doW, *varonly;
 	double *alpha, *weights;
 
 	double *Wnew=0,*Wtmp=0;
-
-	void adaptneigh();
-	void adaptpred();
-	void cubicpred();
-	void delrow();
-	void getnbrs();
-	void getridd();
-	void getridi();
-	void intervals();
-	void linearpred();
-	void makelcaline();
-	void mycpyd();
-	void mycpyi();
-	void mysortd();
-	void mymind();
-	void pointsupdate();
-	void pts();
-	void quadpred();
-	void updatelca();
 
 	mycpyd(input,n,X);
 	intervals(X,initboundhandl,n,I);
@@ -772,15 +699,10 @@ int *doW, *varonly;
 }
 
 /* ********** */
+void getnbrs2(double *X, int *remove, int *pointsin, int *lpo, int *neigh, int *closest, int *nbrs, int* index, int *nn){
 
-void getnbrs2(X, remove, pointsin, lpo,neigh, closest,nbrs,index,nn)
-
-double *X;
-int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
-{
-
-	/* change of lt to unsigned int as suggested by Brian Ripley 5/4/22 */
-	unsigned int lt;
+	/* 02/11/22: REVERT unsigned int change of 5/4/22 */
+	int lt;
 	int d1,r,lr=(*lpo-2),yn,i,j,ln=0,rn=0,numleft=0;
 	int *range;
 	int *checkr,*checkl;
@@ -788,14 +710,9 @@ int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
 	int *temp2;
 	int *tempq, *tempnbrs;
 	int *tempindex, *B,*dummy,one=1;
-	double *sd,sl=0,sr=0,*distances;
-
-	void mywhichi();
-	void getridi();
-	void mysortd();
-	void mysorti();
-	void mycpyi();
-	void mycpyd();
+	double *sd, *distances;
+	/* sl, sr changed to int from double */
+	int sl = 0, sr = 0;
 
 	mywhichi(pointsin,lpo,remove,&r);
 
@@ -836,13 +753,16 @@ int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
 	        sl+=*(checkl+i);
 	        sr+=*(checkr+i);
 	    }
-	    ln=*neigh-(int) sl;
-	    rn=*neigh-(int) sr;
+		/* removed cast to int for sl, sr */
+	    ln= (*neigh - sl);
+	    rn= (*neigh - sr);
 	    free(checkl);
 	    free(checkr);
 	    lt=rn+ln;
-	    tempnbrs=calloc(lt,sizeof(int));
-	    tempindex=calloc(lt,sizeof(int));		/* gets valid neighbours according to initial request and pointsin */
+
+		/* 6/11/22 added cast to unsigned int to avoid exceedance of calloc */
+	    tempnbrs=calloc((unsigned int) lt,sizeof(int));
+	    tempindex=calloc((unsigned int) lt,sizeof(int));		/* gets valid neighbours according to initial request and pointsin */
 	    for(i=0;i<ln;i++){
 	        *(tempnbrs+i)=*(pointsin+r-ln+i-1);
 	        *(tempindex+i)=r-ln+i;
@@ -909,7 +829,7 @@ int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
 
 /* ********** */
 
-void getridd(double *a,int *la,int *pos,double *b){
+void getridd(double *a, int *la, int *pos, double *b){
 
 	int i;
 	for(i=0;i<(*pos-1);i++){
@@ -924,7 +844,7 @@ void getridd(double *a,int *la,int *pos,double *b){
 
 /* ********** */
 
-void getridi(int *a,int *la,int *pos,int *b){
+void getridi(int *a, int *la, int *pos, int *b){
 
 	int i;
 	for(i=0;i<(*pos-1);i++){
@@ -939,16 +859,11 @@ void getridi(int *a,int *la,int *pos,int *b){
 
 /* ********** */
 
-void intervals(X,initboundhandl,n,inter)
+void intervals(double *X, int *initboundhandl, int *n, double *inter){
 
-int *initboundhandl,*n;
-double *X, *inter;
-{
 	double *sX=calloc(*n,sizeof(double));
 	int i,one=1;
 	int l=*n,*order=calloc(*n,sizeof(int));
-
-	void mysortd();
 
 	mysortd(X,n,sX,order,&one);
 
@@ -973,22 +888,13 @@ double *X, *inter;
 
 /* ********** */
 
-void linearpred(pointsin,X,coeff,nbrs,remove,inter,nn,weights,docoeff)
+void linearpred(int *pointsin, double *X, double *coeff, int *nbrs, int *remove, int *inter, int *nn, double *weights, int *docoeff){
 
-int *pointsin,*nbrs,*remove,*inter,*nn,*docoeff;
-double *X, *coeff,*weights;
-{
 	int i,one=1,nc=1,dim;
 	double *xn,*xr;
 	double *tmpxn,*txn;
 	double *tmp,*tmp2,*mm,*cn;
 	double tmpxr,*bhat,pred;
-
-	void mmult();
-	void mycbind();
-	void mycpyd();
-	void myt();
-	void rmatsolve();
 
 	tmpxr=*(X+*remove-1);
 
@@ -1060,13 +966,10 @@ double *X, *coeff,*weights;
 
 /* ********** */
 
-void makelcaline(remove,nn,nbrs,alpha,weights,scheme,inter,closest,newline)
+void makelcaline(int *remove, int *nn, int *nbrs, double *alpha, double *weights, int *scheme, int *inter, int *closest, double *newline){
 
 /* hopefully, this will coerce all necessary arguments to double and concatenate them */
 
-double *alpha,*weights,*newline;
-int *remove,*nn,*nbrs,*scheme,*inter,*closest;
-{
 	int i;
 
 	*newline= (double) *remove;
@@ -1085,12 +988,10 @@ int *remove,*nn,*nbrs,*scheme,*inter,*closest;
 
 /* ********** */
 
-void mmult(double *x,double *y,int *nrx ,int *ncx,int *ncy,double *ans)
-{
+void mmult(double *x, double *y, int *nrx, int *ncx, int *ncy, double *ans){
+
 	char *transa = "T" , *transb = "T" ;
 	double one = 1.0 , zero = 0.0, *tmp=malloc(*nrx**ncy*sizeof(double));
-
-	void myt();
 
 	F77_CALL(dgemm)(transa,transb,nrx,ncy,ncx,&one,x,ncx,y,ncy,&zero,tmp,nrx FCONE FCONE);
 
@@ -1102,11 +1003,7 @@ void mmult(double *x,double *y,int *nrx ,int *ncx,int *ncy,double *ans)
 
 /* ********** */
 
-void mycbind(a,b,ra,ca,cb,c)
-
-double *a,*b,*c;
-int *ra,*ca,*cb;
-{
+void mycbind(double *a, double *b, int *ra, int *ca, int *cb, double *c){
 
 	int i,j,k;
 
@@ -1123,11 +1020,8 @@ int *ra,*ca,*cb;
 
 /* ********** */
 
-void mycpyd(a,len,b)
+void mycpyd(double *a, int *len, double *b){
 
-double *a,*b;
-int *len;
-{
 	int i;
 
 	for(i=0;i<*len;i++){
@@ -1138,11 +1032,8 @@ int *len;
 
 /* ********** */
 
-void mycpyi(a,len,b)
+void mycpyi(int *a, int *len, int *b){
 
-int *a,*b;
-int *len;
-{
 	int i;
 
 	for(i=0;i<*len;i++){
@@ -1153,12 +1044,7 @@ int *len;
 
 /* ********** */
 
-void mydiag(d,n,ones,m)
-
-int *ones,*n;
-double *d, *m;
-
-{
+void mydiag(double *d, int *n, int *ones, double *m){
 
 	int j,k;
 
@@ -1177,14 +1063,9 @@ double *d, *m;
 
 /* ********** */
 
-void mymatchd(numa,numb,lnuma,lnumb,pos)
+void mymatchd(double *numa, double *numb, int *lnuma, int *lnumb, int *pos){
 
-double *numa,*numb;
-int *lnuma, *lnumb,*pos;
-{
 	int i;
-
-	void mywhichd();
 
 	for(i=0;i<*lnuma;i++){
 	    mywhichd(numb,lnumb,numa,pos);
@@ -1196,14 +1077,9 @@ int *lnuma, *lnumb,*pos;
 
 /* ********** */
 
-void mymatchi(numa,numb,lnuma,lnumb,pos)
+void mymatchi(int *numa, int *numb, int *lnuma, int *lnumb, int *pos){
 
-int *numa,*numb;
-int *lnuma, *lnumb,*pos;
-{
 	int i;
-
-	void mywhichi();
 
 	for(i=0;i<*lnuma;i++){
 	    mywhichi(numb,lnumb,numa,pos);
@@ -1215,11 +1091,8 @@ int *lnuma, *lnumb,*pos;
 
 /* ********** */
 
-void mymaxd(num,lnum,max,pos)
+void mymaxd(double *num, int *lnum, double *max, int *pos){
 
-double *num,*max;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*max=*num;
 	*pos=start;
@@ -1234,11 +1107,8 @@ int *lnum,*pos;
 
 /* ********** */
 
-void mymaxi(num,lnum,max,pos)
+void mymaxi(int *num, int *lnum, int *max, int *pos){
 
-int *num,*max;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*max=*num;
 	*pos=start;
@@ -1253,11 +1123,8 @@ int *lnum,*pos;
 
 /* ********** */
 
-void mymind(num,lnum,min,pos)
+void mymind(double *num, int *lnum, double *min, int *pos){
 
-double *num,*min;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*min=*num;
 	*pos=start;
@@ -1272,11 +1139,8 @@ int *lnum,*pos;
 
 /* ********** */
 
-void mymini(num,lnum,min,pos)
+void mymini(int *num, int *lnum, int *min, int *pos){
 
-int *num,*min;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*min=*num;
 	*pos=start;
@@ -1291,11 +1155,7 @@ int *lnum,*pos;
 
 /* ********** */
 
-void myrbind(a,b,ra,ca,rb,c)
-
-double *a,*b,*c;
-int *ra,*ca,*rb;
-{
+void myrbind(double *a, double *b, int *ra, int *ca, int *rb, double *c){
 
 	int i,j,k;
 
@@ -1314,7 +1174,7 @@ int *ra,*ca,*rb;
 
 /* ********** */
 
-void myrevd(double *dx,int *n,double *dy){
+void myrevd(double *dx, int *n, double *dy){
 
 	int incx=-1,incy=1;
 
@@ -1324,11 +1184,7 @@ void myrevd(double *dx,int *n,double *dy){
 
 /* ********** */
 
-void myrevi(a,la,b)
-
-int *a,*b;
-int *la;
-{
+void myrevi(int *a, int *la, int* b){
 
 	int *tmp=a+(*la-1);  /* *tmp points to the last element of "a" */
 	int i;
@@ -1341,18 +1197,10 @@ int *la;
 
 /* ********** */
 
-void mysortd(a,la,sorted,order,inc)
+void mysortd(double *a, int *la, double *sorted, int *order, int *inc){
 
-double *a,*sorted;
-int *la,*order,*inc;
-{
 	int i,*o=calloc(*la,sizeof(int));
 	double *s=calloc(*la,sizeof(double));
-
-	void mycpyd();
-	void mycpyi();
-	void myrevd();
-	void myrevi();
 
 	for(i=0;i<*la;i++){
 	    *(o+i)=(i+1);
@@ -1375,22 +1223,14 @@ int *la,*order,*inc;
 
 /* ********** */
 
-void mysorti2(a,la,sorted,order,inc)
+void mysorti2(int *a, int *la, int* sorted, int *order, int *inc){
 
-int *a,*sorted;
-int *la, *order,*inc;
-{
 	int i,j,newpos,oldpos=*la+10,curlen=*la,*curleft=calloc(*la,sizeof(int)),*oldleft=calloc(*la,sizeof(int));
 	int min;
 	int *current=calloc(*la,sizeof(int)),*old=calloc(*la,sizeof(int));
 	int *o=calloc(*la,sizeof(int));
 
 	int *s=calloc(*la,sizeof(int));
-
-	void mymini();
-	void mycpyi();
-	void getridi();
-	void myrevi();
 
 	for(j=0;j<*la;j++){
 		*(curleft+j)=j+1;
@@ -1436,11 +1276,7 @@ int *la, *order,*inc;
 
 /* ********** */
 
-void mysvd(a,n,rvalues,rvectors,decreasing)
-
-double *a,*rvalues,*rvectors;
-int *n,*decreasing;
-{
+void mysvd(double *a, int *n, double *rvalues, double *rvectors, int *decreasing){
 
 	char jobv[1],range[1],uplo[1];
 
@@ -1450,10 +1286,6 @@ int *n,*decreasing;
 	*/
 	int i,j,il=1,iu=1,m,*isuppz,lwork,liwork,itmp,info=0,*iwork;
 	double vl=0.0,vu=0.0,abstol=0.0,tmp,*work,*rz,*rv;
-
-	void myrevd();
-	void mycpyd();
-	void myt();
 
 	jobv[0]='V';
 	range[0]='A';
@@ -1506,11 +1338,8 @@ int *n,*decreasing;
 
 /* ********** */
 
-void myt(a,ra,ca,ta)
+void myt(double *a, int *ra, int *ca, double *ta){
 
-double *a,*ta;
-int *ra, *ca; 
-{
 	int i,j,indA=0;
 
 	for(j=0;j<*ca;j++){
@@ -1524,11 +1353,8 @@ int *ra, *ca;
 
 /* ********** */
 
-void mywhichd(num,lnum,a,pos)
+void mywhichd(double *num, int *lnum, double *a, int *pos){
 
-double *num,*a;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*pos = start;
 
@@ -1547,11 +1373,8 @@ int *lnum,*pos;
 
 /* ********** */
 
-void mywhichi(num,lnum,a,pos)
+void mywhichi(int *num, int *lnum, int *a, int *pos){
 
-int *num,*a;
-int *lnum,*pos;
-{
 	int i,start=0;
 	*pos=start;
 
@@ -1570,15 +1393,10 @@ int *lnum,*pos;
 
 /* ********** */
 
-void pointsupdate(X,coeff,nn,index,remove,pointsin,wts,l,N,alpha,r)
-
-double *X,*coeff,*wts,*l,*alpha;
-int *nn,*index,*remove,*pointsin,*N,*r;
-{
+void pointsupdate(double *X, double *coeff, int *nn, int *index, int *remove, int *pointsin, double *wts, double *l, int *N, double *alpha,int *r){
 
 	int q1,i,j;
 	double s=0;
-	void mywhichi();
 
 	mywhichi(pointsin,N,remove,r);
 
@@ -1614,12 +1432,8 @@ int *nn,*index,*remove,*pointsin,*N,*r;
 
 /* ********** */
 
-void pts(input,start,n,X)
+void pts(double *input, double *start, int *n, double *X){
 
-double *input, *X;
-double *start;
-int *n;
-{
 	int i;
 	double *ptr = &input[0];
 	double *ptr2 = &X[0];
@@ -1632,23 +1446,14 @@ int *n;
 
 /* ********** */
 
-void quadpred(pointsin,X,coeff,nbrs,remove,inter,nn,weights,docoeff)
+void quadpred(int *pointsin, double *X, double *coeff, int *nbrs, int *remove, int *inter, int *nn, double *weights, int *docoeff){
 
-int *pointsin,*nbrs,*remove,*inter,*nn,*docoeff;
-double *X, *coeff,*weights;
-{
 	int i,one=1,two=2,nc=2,dim;
 	double *xn,*xr;
 	double *tmpxn,*txn;
 	double *tmp,*tmp2,*mm,*cn;
 	double *tmpxr,*bhat,*dummy1,*dummy2;
 	double pred=0;
-
-	void mmult();
-	void mycbind();
-	void mycpyd();
-	void myt();
-	void rmatsolve();
 
 	tmpxr=calloc(1,sizeof(double));
 	*tmpxr=*(X+*remove-1);
@@ -1767,21 +1572,13 @@ double *X, *coeff,*weights;
 
 /* ********** */
 
-void rmatsolve(m,n,inv)
+void rmatsolve(double *m, int *n, double *inv){
 
-double *m,*inv;
-int *n;
-{
 	double *rvalues, *rvectors;
 	double *d,tmpd;
 	double *tev,*D;
 	double *tmp;
 	int i,zero=0,one=1;
-
-	void mysvd();
-	void myt();
-	void mydiag();
-	void mmult();
 
 	if(*n==1){
 	    tmpd=*m;
@@ -1816,21 +1613,14 @@ int *n;
 
 /* ********** */
 
-void transmatdual(lca,po,matno,lpo,nc,W,re)
+void transmatdual(double *lca, int *po, int *matno, int *lpo, int *nc, double *W, int *re){
 
 /* takes in the fwtnp lifting coefficient array, of size length(removelist)*/ 
 /*by 3*max(n_r)+5 (zero filled,remove,nn,nbrs,alpha,weights,scheme,int,closest)*/
 
-double *lca,*W;
-int *po,*matno,*lpo,*nc,*re;   /*matno is length(rem), nc is ncol(lca) */
-{
 
 	int i,j,steps,matsize,matdim,tolddim,nn,*nbrs;
 	double *alpha,*weights,*A,*augment;
-
-	void amatdual();
-	void aug();
-	void mmult();
 
 	/*set up first matrices... */
 	nn=(int) *(lca+(*nc*(*matno-1))+1);
@@ -1894,11 +1684,8 @@ int *po,*matno,*lpo,*nc,*re;   /*matno is length(rem), nc is ncol(lca) */
 
 /* ********** */
 
-void undopointsupdate(coeff,nbrs,index,remove,r,N,gamweights,l,lr,alpha,nn)
+void undopointsupdate(double *coeff, int *nbrs, int *index, int *remove, int *r, int *N, double *gamweights, double *l, double *lr, double *alpha, int *nn){
 
-double *coeff, *gamweights, *l, *lr, *alpha;
-int *nbrs, *index, *remove, *r, *N, *nn;
-{
 	int j;
 	double pred=0,s=0;
 
@@ -1925,22 +1712,16 @@ int *nbrs, *index, *remove, *r, *N, *nn;
 
 /* ********** */
 
-void updatelca(lca,nr,nc,newline,newlca)
+void updatelca(double *lca, int *nr, int *nc, double *newline, double *newlca){
 
 /* adds newline to lca, adding zeros where appropriate. */
 /* NOTE: ncol(lca) is (3*nmax+5). */
 /* initial nr is nrow(lca) */
 /* initial nmax is ncol(lca) */
 
-double *lca, *newline,*newlca;
-int *nr, *nc;
-{
+
 	int one=1,nn,ln,diff,lcadim,newnc;
 	double *zeroadd, *tmplca,*tmpnl;
-
-	void myrbind();
-	void mycbind();
-	void mycpyd();
 
 	nn=(int) *(newline+1);  /* new no. nbrs */
 	ln=3*nn+5;        /* length(newline) */
@@ -1988,104 +1769,13 @@ int *nr, *nc;
 
 }
 
-/* ********** */
-
-void schfromlca(lca,nr,nc,sch)
-
-/*gets schemehist from lca:
-
-1: LP
-2: QP
-3: CP
-
-*/
-
-double *lca;
-int *nr,*nc,*sch;
-{
-	int i, nn;
-
-	for(i=0;i<*nr;i++){
-	    nn=(int) *(lca+(i**nc)+1);
-	    *(sch+i)=(int) *(lca+(i**nc)+(3*nn+2));
-	}
-
-}
 
 /* ********** */
 
-void interfromlca(lca,nr,nc,inter)
-
-/*gets interhist from lca:
-
-0: no intercept
-1: intercept
-
-*/
-
-double *lca;
-int *nr,*nc,*inter;
-{
-	int i, nn;
-
-	for(i=0;i<*nr;i++){
-	    nn=(int) *(lca+(i**nc)+1);
-	    *(inter+i)=(int) *(lca+(i**nc)+(3*nn+3));
-	}
-
-}
-
-/* ********** */
-
-void clofromlca(lca,nr,nc,clo)
-
-/*gets clohist from lca:
-
-0: closest=FALSE
-1: closest=TRUE
-
-*/
-
-double *lca;
-int *nr,*nc,*clo;
-{
-	int i, nn;
-
-	for(i=0;i<*nr;i++){
-	    nn=(int) *(lca+(i**nc)+1);
-	    *(clo+i)=(int) *(lca+(i**nc)+(3*nn+4));
-	}
-
-}
-
-/* ********** */
-
-void nbrsfromlca(lca,nc,rowno,nbrs)
+void afromlca(double *lca, int *nc, int *rowno, double *alpha){
 
 /* row no is given as R index (C index +1) */
 
-int *nbrs,*nc, *rowno;
-double *lca;
-{
-	int i,nn;
-
-	nn=*(lca+((*rowno-1)**nc)+1);
-
-	for(i=0;i<nn;i++){
-	    *(nbrs+i)=(int) *(lca+((*rowno-1)**nc)+2+i);
-	}
-
-}
-
-/* ********** */
-
-void afromlca(lca,nc,rowno,alpha)
-
-/* row no is given as R index (C index +1) */
-
-int *rowno,*nc;
-double *lca,*alpha;
-{
 	int i,nn;
 
 	nn=*(lca+((*rowno-1)**nc)+1);
@@ -2098,13 +1788,87 @@ double *lca,*alpha;
 
 /* ********** */
 
-void wfromlca(lca,nc,rowno,weights)
+void clofromlca(double *lca, int *nr, int *nc, int *clo){
+
+/*gets clohist from lca:
+
+0: closest=FALSE
+1: closest=TRUE
+
+*/
+
+	int i, nn;
+
+	for(i=0;i<*nr;i++){
+	    nn=(int) *(lca+(i**nc)+1);
+	    *(clo+i)=(int) *(lca+(i**nc)+(3*nn+4));
+	}
+
+}
+
+/* ********** */
+
+void interfromlca(double *lca, int *nr, int *nc, int *inter){
+
+/*gets interhist from lca:
+
+0: no intercept
+1: intercept
+
+*/
+
+	int i, nn;
+
+	for(i=0;i<*nr;i++){
+	    nn=(int) *(lca+(i**nc)+1);
+	    *(inter+i)=(int) *(lca+(i**nc)+(3*nn+3));
+	}
+
+}
+
+/* ********** */
+
+void nbrsfromlca(double *lca, int *nc, int *rowno, int *nbrs){
 
 /* row no is given as R index (C index +1) */
 
-int *rowno,*nc;
-double *lca, *weights;
-{
+	int i,nn;
+
+	nn=*(lca+((*rowno-1)**nc)+1);
+
+	for(i=0;i<nn;i++){
+	    *(nbrs+i)=(int) *(lca+((*rowno-1)**nc)+2+i);
+	}
+
+}
+
+/* ********** */
+
+
+void schfromlca(double *lca, int *nr, int *nc, int *sch){
+
+/*gets schemehist from lca:
+
+1: LP
+2: QP
+3: CP
+
+*/
+	int i, nn;
+
+	for(i=0;i<*nr;i++){
+	    nn=(int) *(lca+(i**nc)+1);
+	    *(sch+i)=(int) *(lca+(i**nc)+(3*nn+2));
+	}
+
+}
+
+/* ********** */
+
+void wfromlca(double *lca, int *nc, int *rowno, double *weights){
+
+/* row no is given as R index (C index +1) */
+
 	int i,nn;
 
 	nn=*(lca+((*rowno-1)**nc)+1);
@@ -2117,11 +1881,7 @@ double *lca, *weights;
 
 /* ********** */
 
-void invtnp(X, coeff, lengths, lengthsremove, pointsin, lca,nadd,N,lr,nc,outpo,outlen) 
-
-double *X, *coeff, *lengths, *lengthsremove, *lca,*outlen;
-int *pointsin, *nadd,*N,*lr,*nc,*outpo;
-{
+void invtnp(double *X, double *coeff, double *lengths, double *lengthsremove, int *pointsin, double *lca, int *nadd, int *N, int *lr, int *nc, int *outpo, double *outlen){
 
 	double lrem,*alpha,*weights,*dtmp;
 	int n=*lr+*N,j,k,remove,nn,*nbrs, lcarow, *index, r,*itmp, one=1,zero=0;
@@ -2130,22 +1890,6 @@ int *pointsin, *nadd,*N,*lr,*nc,*outpo;
 	int *o,*o2,Nplus,*q,*q1;
 	int *schlist, *interlist;
 	int scheme, inter;
-
-	void schfromlca();
-	void clofromlca();
-	void interfromlca();
-	void mycpyd();
-	void mycpyi();
-	void mymatchi();
-	void mywhichi();
-	void nbrsfromlca();
-	void undopointsupdate();
-	void mysortd();
-	void mysorti();
-	void linearpred();
-	void quadpred();
-	void cubicpred();
-
 
 	mycpyi(pointsin,N,outpo);   /* just in case they are not initialized as so */
 	mycpyd(lengths,N,outlen);   /* ... */
@@ -2260,23 +2004,13 @@ int *pointsin, *nadd,*N,*lr,*nc,*outpo;
 
 /* ********** */
 
-void findadds(rem,l,lca,nc,index,li,a)
-
-int *rem, *l,*index,*li,*a,*nc;
-double *lca;
-{
+void findadds(int *rem, int *l, double *lca, int *nc, int *index, int *li, int *a){
 
 	int *init2=calloc(*li,sizeof(int));
 	int *init=calloc(*li,sizeof(int));
 	int *tmp2=calloc(*li,sizeof(int));
 	int *tmp,*nbrs,nn;
 	int i,ii,j,jp,k,m,p;
-
-	void mymatchi();
-	void nbrsfromlca();
-	void mywhichi();
-	void mymaxi();
-	void mycpyi();
 
 	tmp=calloc(*li,sizeof(int));
 
@@ -2333,7 +2067,7 @@ double *lca;
 
 /* ********** */
 
-void delrow(double *M,int *nr,int *nc,int *i,double *Mnew){
+void delrow(double *M, int *nr, int *nc, int *i, double *Mnew){
 
 	int j,k,nrn=*nr-1,dim=*nc*nrn;
 
@@ -2358,20 +2092,12 @@ void delrow(double *M,int *nr,int *nc,int *i,double *Mnew){
 
 /* ********** */
 
-void getnbrs(X, remove, pointsin, lpo,neigh, closest,nbrs,index,nn)
-
-double *X;
-int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
-{
+void getnbrs(double *X, int *remove, int *pointsin, int *lpo, int *neigh, int *closest, int *nbrs, int* index, int *nn){
 
 	int r,st,i,left=0,right=0,tmp,n1;
 	int *rr,dummy,one=1;
 	int *q,*tempindex;
 	double *sd,*distances;
-
-	void mywhichi();
-	void mysortd();
-	void mysorti();
 
 	mywhichi(pointsin,lpo,remove,&r);
 
@@ -2459,11 +2185,7 @@ int *remove, *pointsin, *lpo,*neigh,*closest,*nbrs,*index,*nn;
 
 /* ********** */
 
-void mysorti(a,la,sorted, order,inc)
-
-int *a,*la,*sorted,*order,*inc;
-
-{
+void mysorti(int *a, int *la, int* sorted, int *order, int *inc){
 
 	int i;
 	int *o=calloc(*la,sizeof(int)),*s2=calloc(*la,sizeof(int));
@@ -2476,9 +2198,6 @@ int *a,*la,*sorted,*order,*inc;
 
 	/* this is a brute force, slightly inefficient way of
 	sorting integers with index since nothing else seems to work */
-
-	void mycpyi();
-	void myrevi();
 
 	mycpyi(a,la,s2);
 
@@ -2593,11 +2312,8 @@ int *la, *order;
 
 
 
-void mmult2(A,B,ra,ca,cb,C)
+void mmult2(double *A, double *B, int *ra, int *ca, int *cb, double *C){
 
-double *A,*B,*C;
-int *ra,*ca,*cb;
-{
 	double sum=0;
 	int i,j,k;
 
@@ -2614,11 +2330,8 @@ int *ra,*ca,*cb;
 
 }
 
-void mmult3(A,B,ra,ca,cb,C)
+void mmult3(double *A, double *B, int *ra, int *ca, int *cb, double *C){
 
-double *A,*B,*C;
-int *ra,*ca,*cb;
-{
 	double sum=0;
 	int i,j,k;
 
@@ -2639,15 +2352,7 @@ int *ra,*ca,*cb;
 
 /* ********** */
 
-void
-fwtnpperm(input,f,nkeep,intercept,initboundhandl,neighbours,closest,LocalPred,n,coeff,lengthsremove,lengths,lca,pointsin,nc,traj,doW,W,varonly,v)
-
-double *input,*f,*coeff,*lca,*lengthsremove,*lengths;
-int
-*nkeep,*intercept,*initboundhandl,*neighbours,*closest,*LocalPred,*n,*pointsin,*nc, *traj;
-double *W,*v;
-int *doW, *varonly;
-{
+void fwtnpperm(double *input, double *f, int *nkeep, int *intercept, int *initboundhandl, int *neighbours, int *closest, int *LocalPred, int *n, double *coeff, double *lengthsremove, double *lengths, double *lca, int *pointsin, int *nc, int *traj, int *doW, double *W, int *varonly, double *v){
 
 	int i,j,k=0,N=*n,nn,scheme,r,remove,nr=0,max,dim,dim1,dim2,dim2sq,dummy=*n-*nkeep, nnmax=2**neighbours,one=1, ex=0;
 	int *po;
@@ -2667,25 +2372,6 @@ int *doW, *varonly;
 	double *alpha, *weights;
 
 	double *Wnew=0,*Wtmp=0;
-
-	void adaptneigh();
-	void adaptpred();
-	void cubicpred();
-	void delrow();
-	void getnbrs();
-	void getridd();
-	void getridi();
-	void intervals();
-	void linearpred();
-	void makelcaline();
-	void mycpyd();
-	void mycpyi();
-	void mysortd();
-	void mymind();
-	void pointsupdate();
-	void pts();
-	void quadpred();
-	void updatelca();
 
 	mycpyd(input,n,X);
 	intervals(X,initboundhandl,n,I);

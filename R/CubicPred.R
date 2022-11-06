@@ -2,22 +2,22 @@
 function(pointsin,X,coeff,nbrs,remove,intercept,neighbours){
 
 #does local cubic  prediction for the point remove based on N 
-#points (with intercept as default);
+#points (with intercept as default)
 
-Xneighbours<-cbind(X[nbrs],X[nbrs]^2,X[nbrs]^3);
-Xremove<-cbind(X[remove],X[remove]^2,X[remove]^3);
+Xneighbours<-cbind(X[nbrs],X[nbrs]^2,X[nbrs]^3)
+Xremove<-cbind(X[remove],X[remove]^2,X[remove]^3)
 
 if (intercept){
-	Xneighbours<-cbind(1,Xneighbours);
-	Xremove<-as.row(c(1,Xremove));
+	Xneighbours<-cbind(1,Xneighbours)
+	Xremove<-as.row(c(1,Xremove))
 		}
 
 if (length(nbrs)>=4){       #possible to have curve with intercept
 	temp<-crossprod(Xneighbours)
 	mm<-Rmatsolve(temp)%*%t(Xneighbours)
-	bhat<-mm%*%matrix(coeff[nbrs],ncol=1);
-	pred<-Xremove%*%bhat;
-	weights<-matrix(Xremove,nrow=1)%*%mm;  #works out neighbour weights
+	bhat<-mm%*%matrix(coeff[nbrs],ncol=1)
+	pred<-Xremove%*%bhat
+	weights<-matrix(Xremove,nrow=1)%*%mm  #works out neighbour weights
 		}
 	
 if(length(nbrs)==3){
@@ -30,11 +30,11 @@ if(length(nbrs)==3){
 	temp<-crossprod(Xneighbours)
 	mm<-Rmatsolve(temp)%*%t(Xneighbours)
 
-	bhat<-mm%*%matrix(coeff[nbrs],ncol=1);
+	bhat<-mm%*%matrix(coeff[nbrs],ncol=1)
 	
-	pred<-Xremove%*%bhat;
+	pred<-Xremove%*%bhat
 		
-	weights<-matrix(Xremove,nrow=1)%*%mm;  #works out neighbour weights
+	weights<-matrix(Xremove,nrow=1)%*%mm  #works out neighbour weights
 	
 		}
 if(length(nbrs)==2){
@@ -48,21 +48,21 @@ if(length(nbrs)==2){
 	temp<-crossprod(Xneighbours)
 	mm<-Rmatsolve(temp)%*%t(Xneighbours)
 
-	bhat<-mm%*%matrix(coeff[nbrs],ncol=1);
+	bhat<-mm%*%matrix(coeff[nbrs],ncol=1)
 
-	pred<-Xremove%*%bhat;
+	pred<-Xremove%*%bhat
 		
-	weights<-matrix(Xremove,nrow=1)%*%mm;  #works out neighbour weights
+	weights<-matrix(Xremove,nrow=1)%*%mm  #works out neighbour weights
 	}
 		
 if(length(nbrs)==1){
-    mm<-0;
-    bhat<-1;
-    weights<-1;
-    pred<-coeff[nbrs];
+    mm<-0
+    bhat<-1
+    weights<-1
+    pred<-coeff[nbrs]
     }
 
-return(list(weights=weights,pred=pred,coeff=coeff));
+return(list(weights=weights,pred=pred,coeff=coeff))
 
 }
 

@@ -2,7 +2,7 @@
 function(pointsin,X,coefflist,coeff,nbrs,newnbrs,remove,intercept,neighbours,mpdet,g){
 
 #does local quadratic (parabolic) prediction for the point remove based on N 
-#points (with intercept as default);
+#points (with intercept as default)
 #multiple point consideration
 
 if (length(pointsin)==2){

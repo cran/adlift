@@ -2,7 +2,7 @@
 function(pointsin,X,coeff,nbrs,remove,intercept,neighbours){
 
 #does local adaptive prediction for the point remove based on N 
-#points (chooses method of prediction and intercept);
+#points (chooses method of prediction and intercept)
 
 mindetails<-NULL
 minindices<-NULL
@@ -11,7 +11,7 @@ tempres<-list()
 newinfo<-list()
 nlist<-list()
 
-N<-length(pointsin);
+N<-length(pointsin)
 
 min1<-min(N-1,neighbours)
 min2<-min(N-1,2*neighbours)

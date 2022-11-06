@@ -3,7 +3,7 @@ function(X,coeff,nbrs,newnbrs,index,remove,pointsin,weights,lengths){
 
 #does the update lifting step based on nbrs of remove
 
-r<-which(pointsin==remove);
+r<-which(pointsin==remove)
 
 N<-length(pointsin)
 pos<-NULL
