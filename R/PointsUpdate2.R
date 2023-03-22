@@ -10,7 +10,7 @@ if (length(nbrs) == 1) {
 	q <- which(pointsin == nbrs)
 }
 
-ans <- .C("pointsupdate", as.double(X), c = as.double(coeff), 
+ans <- .C(C_pointsupdate, as.double(X), c = as.double(coeff), 
        	as.integer(length(nbrs)), as.integer(index), as.integer(remove), 
        	as.integer(pointsin), w = as.double(weights), l = as.double(lengths), 
        	N = as.integer(N), a = as.double(alpha), r = as.integer(0))

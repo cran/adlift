@@ -43,7 +43,7 @@ newcoeff[po]<-out$coeff[po]
     
 neighbrs<-list()
 for(kk in 1:length(rem)){
-	neighbrs[[kk]]<-.C("nbrsfromlca",as.double(t(lca)),as.integer(ncol(lca)),as.integer(kk),
+	neighbrs[[kk]]<-.C(C_nbrsfromlca,as.double(t(lca)),as.integer(ncol(lca)),as.integer(kk),
                     n=as.integer(rep(0,times=lca[kk,2])))$n
 }
                     

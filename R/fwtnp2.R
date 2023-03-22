@@ -28,7 +28,7 @@ if ((n - nkeep) > 0) {
         pointsin <- coeff
         lengthsremove <- rep(0, times = n - nkeep)
         lca <- matrix(0, n - nkeep, 6 * neighbours + 5)
-        ans <- .C("fwtnp", as.double(input), as.double(f), as.integer(nkeep), 
+        ans <- .C(C_fwtnp, as.double(input), as.double(f), as.integer(nkeep), 
             as.integer(intercept), as.integer(initboundhandl), 
             as.integer(neighbours), as.integer(closest), as.integer(LocalPred), 
             as.integer(n), coeff = as.double(coeff), lr = as.double(lengthsremove), 

@@ -1,6 +1,6 @@
 Package: adlift
-Version: 1.4-4
-Date: 2022-11-04
+Version: 1.4-5
+Date: 2023-03-22
 Title: An Adaptive Lifting Scheme Algorithm
 Author: Matt Nunes [aut, cre],
   Marina Knight [aut],
@@ -10,7 +10,7 @@ Maintainer: Matt Nunes <nunesrpackages@gmail.com>
 Description: Adaptive wavelet lifting transforms for signal denoising using optimal local neighbourhood regression, from Nunes et al. (2006) <doi:10.1007/s11222-006-6560-y>.
 Depends: EbayesThresh
 License: GPL
-Packaged: 2022-11-06 14:18:42 UTC; man54
+Packaged: 2023-03-22 15:45:17 UTC; matt
 Repository: CRAN
-Date/Publication: 2022-11-06 15:30:09 UTC
+Date/Publication: 2023-03-22 17:10:05 UTC
 NeedsCompilation: yes

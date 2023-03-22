@@ -18,7 +18,7 @@ if(nadd>0){
 
 	nr<-lr-nadd
 
-	ans<-.C("invtnp",as.double(X),coeff=as.double(coeff),lengths=as.double(lengths),
+	ans<-.C(C_invtnp,as.double(X),coeff=as.double(coeff),lengths=as.double(lengths),
 		lengthsremove=as.double(lengthsremove),as.integer(pointsin),
 		as.double(t(lca)),as.integer(nadd),as.integer(N),as.integer(lr),
 		as.integer(nc),outpo=as.integer(rep(0,times=N+nadd)),
