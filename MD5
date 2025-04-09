@@ -1,4 +1,4 @@
-8db32c61f3eee64cea6df4e811fe9de4 *DESCRIPTION
+d590bcc9bb215dd7df6a75c4ec9cb8f8 *DESCRIPTION
 933ff27ba3ee992aad1a14088011f14e *NAMESPACE
 90715ecb9ebb1dd10c6a8b68690a0f30 *R/AdaptNeigh.R
 43a053487e365b29bff223f29cefc228 *R/AdaptNeighmp.R
@@ -55,7 +55,7 @@ e719ef6c7ecf02379cd973f84fb46958 *man/AdaptNeigh.Rd
 b0631a273b0a4c670e1cd7c34c0f105c *man/AdaptNeighmp.Rd
 93c0606aaa6e31e3dcce84fecb5fb8de *man/AdaptPred.Rd
 30394e6a7d50e205b0789c262efa6fe0 *man/AdaptPredmp.Rd
-2a639c20fd8e3c3b80527315be949fa0 *man/Amatdual.Rd
+c8fd759693b89a7fdcc1d51bc6cb40f6 *man/Amatdual.Rd
 aa161b2772405945f3c6aabd0e40f2cf *man/CubicPred.Rd
 2112f1f8f7574600ebda6302e26165d9 *man/CubicPredmp.Rd
 fe024660105fcc3359360f870eb4160d *man/LinearPred.Rd
@@ -79,7 +79,7 @@ cf0dc41e12a61791d2617d0446d38220 *man/denoiseheteromp.Rd
 42b780f6ea7b0b20bb2e72fb94b59b6c *man/denoiseheteroprop.Rd
 635666c48805fa5def414dfe8f0d3632 *man/dojitter.Rd
 4301dd8d4d7710fc6305ba89503cb29a *man/findadds.Rd
-20da8443d3601730d512031dfffc7450 *man/fwtnp.Rd
+8ed60bcbdf6c515a509cfd77dd159f92 *man/fwtnp.Rd
 1304dd0b646b36e5fb8a32de04540ec3 *man/fwtnpmp.Rd
 9f79f2d4e0ce6ce5e209fed08752d9cd *man/getnbrs.Rd
 6063564bfb9da7173560c47908d7e933 *man/heterovar.Rd
@@ -94,6 +94,6 @@ b3bba635fe3446b3dccb138f8542381d *man/motorcycledata.Rd
 3e494afcf5968fec5de74eea755867b8 *man/postmean.cauchy.Rd
 19331d222ce24782710fea9419d78aef *man/transmatdual.Rd
 3996e7c16bfb96fad295ee425815cb4d *src/Makevars
-b3ca953062b1e006fa7fe1ca2d6d3ce9 *src/adlift.c
+2a349f145b38fb27455f16d5e4f6c664 *src/adlift.c
 79d31267c81cdf131fdaae6d7c270396 *src/adlift.h
 48331d5eaca42b307aa2e8063297a7b0 *src/init.c

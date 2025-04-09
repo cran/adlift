@@ -27,7 +27,7 @@ LocalPred = LinearPred, do.W=FALSE, varonly=FALSE)
   variances should be returned (if \code{do.W=TRUE}).}
 }
 \details{
-Given \eqn{n} points on a line, \env{input}, each with a corresponding env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
+Given \eqn{n} points on a line, \env{input}, each with a corresponding \env{f} value this algorithm computes a lifting transform of the (\env{input},\env{f}) data. If lengths are inputted (\env{inputtype="lengths"}), then the gridpoints are taken to be the left endpoints of the intervals defined by the lengths inputted. 
 Step One. Order the grid values so that corresponding intervals can be constructed. 
 
 Step Two. Compute "integrals" for each point. For each point its integral is the length of the interval associated to the gridpoint. 

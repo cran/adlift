@@ -716,7 +716,12 @@ void getnbrs2(double *X, int *remove, int *pointsin, int *lpo, int *neigh, int *
 
 	mywhichi(pointsin,lpo,remove,&r);
 
+	/*  09/04/ 25: reintroduce unsigned int cast for exceedance of memory (GCC 14.2)
 	range=calloc(lr,sizeof(int));
+	*/
+
+	range=calloc((unsigned int) lr,sizeof(int));
+
 	for(j=0;j<(*lpo-2);j++){
 		*(range+j)=j+2;
 	}
@@ -1225,12 +1230,30 @@ void mysortd(double *a, int *la, double *sorted, int *order, int *inc){
 
 void mysorti2(int *a, int *la, int* sorted, int *order, int *inc){
 
+/*
 	int i,j,newpos,oldpos=*la+10,curlen=*la,*curleft=calloc(*la,sizeof(int)),*oldleft=calloc(*la,sizeof(int));
 	int min;
 	int *current=calloc(*la,sizeof(int)),*old=calloc(*la,sizeof(int));
 	int *o=calloc(*la,sizeof(int));
 
 	int *s=calloc(*la,sizeof(int));
+*/
+	/* 09/04/25.  Due to GCC 14.2 there are hard warnings from memory allocation being
+	too big.  I am changing the allocation here tu unsigned int in a structured
+	way, replacing the multiple accesses of *la .
+
+	The unsigned int should fix the warnings from the call in old lines 1255,1256
+	 also have changed all callocs in this function
+	*/
+
+	int i,j,newpos, min;
+	int oldpos=*la+10, curlen=*la;
+	int *curleft=calloc((unsigned int) curlen, sizeof(int)),*oldleft=calloc((unsigned int) curlen, sizeof(int));
+	int *current=calloc((unsigned int) curlen, sizeof(int)),*old=calloc((unsigned int) curlen, sizeof(int));
+	int *o=calloc((unsigned int) curlen, sizeof(int));
+
+	int *s=calloc((unsigned int) curlen, sizeof(int));
+
 
 	for(j=0;j<*la;j++){
 		*(curleft+j)=j+1;
@@ -1245,15 +1268,16 @@ void mysorti2(int *a, int *la, int* sorted, int *order, int *inc){
 	    oldpos=newpos-1;
 	    *(o+i)=*(curleft+oldpos);
 	    free(old);
-	    old=calloc(curlen,sizeof(int));
+	    old=calloc((unsigned int) curlen,sizeof(int));
 	    mycpyi(current,&curlen,old);
 	    free(oldleft);
-	    oldleft=calloc(curlen,sizeof(int));
+	    oldleft=calloc((unsigned int) curlen,sizeof(int));
 	    mycpyi(curleft,&curlen,oldleft);
 	    free(current);
 	    free(curleft);
-	    current=calloc((curlen-1),sizeof(int));
-	    curleft=calloc((curlen-1),sizeof(int));
+		// here too
+	    current=calloc((unsigned int) (curlen-1), sizeof(int));  // <--
+	    curleft=calloc((unsigned int) (curlen-1), sizeof(int));  // <--
 	    getridi(old,&curlen,&newpos,current);
 	    getridi(oldleft,&curlen,&newpos,curleft);
 	    curlen-=1;
